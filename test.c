@@ -8,16 +8,6 @@ typedef struct	s_data {
 	int	endian;
 }	t_data;
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
 /*
 int	get_transparency(int trgb)
 {
@@ -48,9 +38,18 @@ typedef struct	s_vars {
 int	ft_close(int keycode, t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
+	// une fonction free 
 	exit(0);
 	return (0);
 }
+/*
+//int funct(int button, int x, int y, t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	// une fonction free 
+	exit(0);
+	return (0);
+}*/
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -75,7 +74,7 @@ int	main(void)
 	my_mlx_pixel_put(&img, 75, 75, 0x00FF0000);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
-//	mlx_hook(vars.win, 9, 1L<<5, ft_close, &vars);
+//	mlx_hook(vars.win, 4, 1L<<5, ft_close, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
