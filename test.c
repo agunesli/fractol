@@ -74,7 +74,8 @@ int	main(void)
 	my_mlx_pixel_put(&img, 75, 75, 0x00FF0000);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
-//	mlx_hook(vars.win, 4, 1L<<5, ft_close, &vars);
+//	mlx_hook(vars.win, 4, 1L<<2, ft_close, &vars); // press_mouse
+//	mlx_hook(vars.win, 6, 1L<<6, ft_close, &vars); // move_mouse
 	mlx_loop(vars.mlx);
 	return (0);
 }
