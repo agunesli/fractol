@@ -35,6 +35,17 @@ typedef struct	s_vars {
 	void	*win;
 }				t_vars;
 
+
+/*
+void	end_program(t_disp *d)
+{
+	mlx_destroy_image(d->mlx, d->pic);
+	mlx_destroy_window(d->mlx, d->win);
+	free(d);
+	exit(0);
+}
+*/
+
 int	ft_close(int keycode, t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
