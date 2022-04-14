@@ -35,7 +35,7 @@ int	ft_strlen(char *str)
 }
 void	ft_putstr(char *str)
 {
-	write(1, str, ft_stelen(str));
+	write(1, str, ft_strlen(str));
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -89,8 +89,8 @@ int	mouse_move(int x, int y, t_vars *vars)
 {
 	if (vars->fractal == 2 && vars-> lock == 0)
 	{
-		vars->x = 2 * (double)x / WIDTH - 1;
-		vars->y = 2 * (double)y / HEIGHT - 1;
+		vars->x_coor = 2 * (double)x / WIDTH - 1;
+		vars->y_coor = 2 * (double)y / HEIGHT - 1;
 	}
 	return (0);
 }
@@ -112,11 +112,11 @@ int	ft_close(int keycode, t_vars *vars)
 	return (0);
 }*/
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -133,7 +133,7 @@ int	main(void)
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
 		merror("Error with mlx_init\n");
-	vars.win = mlx_new_window(vars.mlx, WIDTHH, HEIGHT, "fractol");
+	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "fractol");
 	if (!vars.win)
 		merror("Error with mlx_nex_window\n");
 	vars.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
@@ -143,10 +143,10 @@ int	main(void)
 	if (!vars.addr)
 		merror("Error with mlx_init\n");
 
-	my_mlx_pixel_put(&img, 50, 50, 0x00FF0000);
-	my_mlx_pixel_put(&img, 50, 75, 0x00FF0000);
-	my_mlx_pixel_put(&img, 75, 50, 0x00FF0000);
-	my_mlx_pixel_put(&img, 75, 75, 0x00FF0000);
+	my_mlx_pixel_put(&vars, 50, 50, 0x00FF0000);
+	my_mlx_pixel_put(&vars, 50, 75, 0x00FF0000);
+	my_mlx_pixel_put(&vars, 75, 50, 0x00FF0000);
+	my_mlx_pixel_put(&vars, 75, 75, 0x00FF0000);
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
