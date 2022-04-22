@@ -1,5 +1,5 @@
-#include "fractol.h"
-
+//#include "fractol.h"
+#include <math.h>
 double	*mult(double z1[2], double z2[2])
 {
 	double	z[2];
@@ -12,7 +12,7 @@ double	*mult(double z1[2], double z2[2])
 double	*dist(double z[2])
 	return (sqrt(z[0] * z[0] + z[1] * z[1]));
 
-double	geom(double c[2])
+int	geom(double c[2])
 {
 	double	z[2];
 	double	iteri;
