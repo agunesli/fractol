@@ -1,34 +1,100 @@
 //#include "fractol.h"
 #include <math.h>
-double	*mult(double z1[2], double z2[2])
-{
-	double	z[2];
+#include <stdio.h>
+#define xmin -10
+#define ymin -10
+#define xmax 10
+#define ymax 10
 
-	z[0] = z1[0] * z2[0] - z1[1] * z2[1];
-	z[1] = z1[0] * z2[1] + z1[1] * z2[0];
+typedef struct	s_complex
+{
+	double	r;
+	double	i;
+}	t_complex;
+
+t_complex	*mult(t_complex *z1, t_complex *z2)
+{
+	t_complex	*z;
+
+	z->r = z1->r * z2->r - z1->i * z2->i;
+	z->i = z1->r * z2->i + z1->i * z2->r;
 	return (z);
 }
 
-double	*dist(double z[2])
-	return (sqrt(z[0] * z[0] + z[1] * z[1]));
-
-int	geom(double c[2])
+double	dist(t_complex *z)
 {
-	double	z[2];
-	double	iteri;
-	double	i;
+	return (sqrt(z->r * z->r + z->i * z->i));
+}
 
-	z[0] = 1;
-	z[1] = 0;
-	iteri = 10;
+t_complex	*add(t_complex *z1, t_complex *z2)
+{
+	t_complex	*z;
+
+	z->r = z1->r + z2->r;
+	z->i = z1->i + z2->i;
+	return (z);
+}
+
+int	quad(t_complex *c)
+{
+	t_complex	*z;
+	int		iteri;
+	int		i;
+
+	z->r = 0;
+	z->i = 0;
+	iteri = 100;
+	i = 0;
+	while (i < iteri)
+	{	
+		z = add(mult(z, z), c);
+		i++;
+	}	
+	if (dist(z) < xmax)
+		return (1);
+	return (0);	
+}
+
+int	geom(t_complex *c)
+{
+	t_complex	*z;
+	int		iteri;
+	int		i;
+
+	z->r = 0;
+	z->i = 0;
+	iteri = 100;
 	i = 0;
 	while (i < iteri)
 	{	
 		z = mult(z, c);
 		i++;
 	}	
-	if (dist(z) > xmin)
-		return (0);
-	else
-		return (1);	
+	if (dist(z) < xmax)
+		return (1);
+	return (0);	
+}
+
+void	figure()
+{
+	double	delta;
+	double	i;
+	double	j;
+	t_complex	c;
+
+	i = xmin;
+	j = ymin;
+	delta = 1;
+	while (i < xmax)
+	{
+		while (j < ymax)
+		{
+			c.r = i;
+			c.i = j;
+			if (geom(&c))
+				printf("bouh\n"); //put_pixel
+			j += delta;
+		}
+		i += delta;
+	}
 }
