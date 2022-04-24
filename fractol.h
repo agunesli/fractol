@@ -17,6 +17,10 @@
 # include <math.h>
 # include "../mlx/mlx.h"
 
+# define MANDELBROT 1
+# define JULIA 2
+# define KOCH 3
+
 # define WIDTH 1920
 # define HEIGHT 1080
 
@@ -35,11 +39,19 @@
 #  define K_DIGIT_1	49
 #  define K_L		108*/
 
+
+// bpp => bits_per_pixel;
 typedef struct  s_vars {
         void    *mlx;
         void    *win;
         int     fractal;
-	int	lock;
+	int	lock; //pour julia 
+	double	zoom;
+	double	xmin;
+	double	ymin;
+	double	xmax;
+	double	ymax;
+	double	iteri;
 	double	x_coor;
 	double	y_coor;
 	double	x_img;
@@ -50,5 +62,18 @@ typedef struct  s_vars {
         int     line_length;
         int     endian;
 }	t_vars;
+
+typedef struct  s_complex
+{
+        double  r;
+        double  i;
+}       t_complex;
+
+// utils.c
+int	ft_strlen(char *str);
+void	ft_putstr(char *str);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	found_fractal(char *fract);
+void	merror(char *str);
 
 #endif

@@ -22,59 +22,6 @@ int	get_blue(int trgb)
 }
 */
 
-// bpp => bits_per_pixel;
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-void	ft_putstr(char *str)
-{
-	write(1, str, ft_strlen(str));
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	while (n && *(unsigned char *)s1
-		&& *(unsigned char *)s1 == *(unsigned char *)s2)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if (n)
-		return (*(unsigned char *)s1 - *(unsigned char *)s2);
-	else
-		return (0);
-}
-
-int	found_fractal(char *fract)
-{
-	if (!ft_strncmp("Mandelbrot", fract, 11))
-		return (1);
-	else if  (!ft_strncmp("Julia", fract, 6))
-		return (2);
-	else if  (!ft_strncmp("Flocon de Koch", fract, 14))
-		return (3);
-	else
-	{
-		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr("--> Mandelbort\n --> Julia\n --> Flocon de Koch\n");
-		exit(EXIT_FAILURE);
-		return (0);
-	}
-}
-
-void	merror(char *str)
-{
-	ft_putstr("str");
-	exit(EXIT_FAILURE);
-}
 /*
 void	end_program(t_disp *d)
 {
@@ -112,6 +59,56 @@ int	ft_close(int keycode, t_vars *vars)
 	return (0);
 }*/
 
+void	init_max_min(t_vars *vars)
+{
+	if (d->choice == JULIA)
+	{
+		d->p.xmax = 1.25;
+		d->p.xmin = -1.25;
+		d->p.ymax = 1.25;
+		d->p.ymin = -1.25;
+	}
+	else if (d->choice == MANDELBROT)
+	{
+		d->p.xmax = 0.5;
+		d->p.xmin = -2;
+		d->p.ymax = 1.25;
+		d->p.ymin = -1.25;
+	}
+	else if (d->choice == KOCH)
+	{
+		d->p.xmax = 0.5;
+		d->p.xmin = -2;
+		d->p.ymax = 1.25;
+		d->p.ymin = -1.25;
+	}
+}
+
+void	init_struct(t_vars *vars, char *fract)
+{
+	vars->mlx = NULL;
+        vars->win = NULL;
+	vars->fractal = found_fractal(fract);
+        vars->zoom = 1;
+	//pour julia
+	if (vars->fractal == JULIA)
+        	vars->lock = 0;
+	else
+        	vars->lock = 1;
+       	init_max_min(vars);
+        vars->iteri = 50;
+	/*vars->x_coor;
+        vars->y_coor;
+        vars->x_img;
+        vars->y_img;*/
+        vars->img = NULL;
+	vars->addr = NULL;
+        vars->bpp = 0;
+        vars->line_length = 0;
+        vars->endian = 0;
+}
+
+
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
@@ -127,9 +124,10 @@ int	main(void)
 
 	
 /*	if (argc != 2)
-		ft_putstr("Un seul argument est attendu\n");
-	else
-		vars.fractal = found_fractal(argv[1]);		*/
+		merror("Un seul argument est attendu\n");*/
+	
+	init_struct(vars, argv[1]); // a faire
+	
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
 		merror("Error with mlx_init\n");
@@ -143,6 +141,8 @@ int	main(void)
 	if (!vars.addr)
 		merror("Error with mlx_init\n");
 
+
+	//test pour voir le fonctionnement
 	my_mlx_pixel_put(&vars, 50, 50, 0x00FF0000);
 	my_mlx_pixel_put(&vars, 50, 75, 0x00FF0000);
 	my_mlx_pixel_put(&vars, 75, 50, 0x00FF0000);

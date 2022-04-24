@@ -1,4 +1,4 @@
-SRC_M	= test.c
+SRC_M	= test.c utils.c
 
 SRC_H	= fractol.h
 
