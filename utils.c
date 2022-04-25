@@ -41,7 +41,7 @@ int	found_fractal(char *fract)
 	else
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr("--> Mandelbort\n --> Julia\n --> Flocon de Koch\n");
+		ft_putstr(" --> Mandelbort\n --> Julia\n --> Flocon de Koch\n");
 		exit(EXIT_FAILURE);
 			return (0);
 	}
@@ -49,6 +49,6 @@ int	found_fractal(char *fract)
 
 void	merror(char *str)
 {
-	ft_putstr("str");
+	ft_putstr(str);
 	exit(EXIT_FAILURE);
 }

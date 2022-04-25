@@ -88,26 +88,26 @@ void	draw(t_vars vars)
 /*
 void	init_max_min(t_vars *vars)
 {
-	if (d->choice == JULIA)
+	if (vars->fractal == JULIA)
 	{
-		d->p.xmax = 1.25;
-		d->p.xmin = -1.25;
-		d->p.ymax = 1.25;
-		d->p.ymin = -1.25;
+		vars->xmax = 1.25;
+		vars->xmin = -1.25;
+		vars->ymax = 1.25;
+		vars->ymin = -1.25;
 	}
-	else if (d->choice == MANDELBROT)
+	else if (vars->fractal == MANDELBROT)
 	{
-		d->p.xmax = 0.5;
-		d->p.xmin = -2;
-		d->p.ymax = 1.25;
-		d->p.ymin = -1.25;
+		vars->xmax = 0.5;
+		vars->xmin = -2;
+		vars->ymax = 1.25;
+		vars->ymin = -1.25;
 	}
-	else if (d->choice == KOCH)
+	else if (vars->fractal == KOCH)
 	{
-		d->p.xmax = 0.5;
-		d->p.xmin = -2;
-		d->p.ymax = 1.25;
-		d->p.ymin = -1.25;
+		vars->xmax = 0.5;
+		vars->xmin = -2;
+		vars->ymax = 1.25;
+		vars->ymin = -1.25;
 	}
 } */
 
@@ -122,10 +122,10 @@ void	init_struct(t_vars *vars, char *fract)
         	vars->lock = 0;
 	else
         	vars->lock = 1;
-	d->p.xmax = 10;
-	d->p.xmin = -10;
-	d->p.ymax = 10;
-	d->p.ymin = -10;
+	vars->xmax = 5;
+	vars->xmin = -5;
+	vars->ymax = 5;
+	vars->ymin = -5;
        //	init_max_min(vars);
         vars->iteri = 50;
 	/*vars->x_coor;
@@ -148,44 +148,73 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_mandelbrot(t_vars vars,  t_complex c)
+
+
+void	mandelbrot(t_vars *vars,  t_complex c)
 {
 	int	i;
 	double	dist;
 	double	tmp;
-	t_comple	z;
+	t_complex	z;
 
-	z->r = 0;
-	z->i = 0;
+	z.r = 0;
+	z.i = 0;
 	dist = z.r * z.r + z.i * z.i;
 	tmp = 0;
 	i = 0;
-	while (i < vars->iteri && dist < vars->xmin)
+	while (i < vars->iteri)
 	{
 		tmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
-		z.imag = 2 * z. * tmp + c.i;
+		z.i = 2 * z.i * tmp + c.i;
 		dist = z.r * z.r + z.i * z.i;
 		i++;
 	}
+//	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
+/*	if (dist < vars->xmax)
+	{
+		ft_putstr("bouh\n"); ///
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, c.r, c.i);
+	}*/
 }
 
+void	draw_mandelbrot(t_vars *vars)
+{
+	
+	int	x;
+	int	y;
+	t_complex	c;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			c.r = x;
+			c.i = y;
+			mandelbrot(vars, c);
+			x++;
+		}
+		y++;
+	}
+}
 void	draw_fractal(t_vars *vars)
 {
 	if (vars->fractal == MANDELBROT)
 		draw_mandelbrot(vars);
-	else if (vars->fractal == JULIA)
+/*	else if (vars->fractal == JULIA)
 		draw_julia(vars);
 	else if (vars->fratal == KOCH)
 		draw_koch(vars);
 	else
-		merror("Probleme avec nom de la fractal\n");
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
+		merror("Probleme avec nom de la fractal\n");*/
+//	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 }
 
 
 // 1 => Mandelbrot 2 => Julia 3 => Flocon de Koch
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
@@ -193,7 +222,7 @@ int	main(void)
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
 	
-	init_struct(vars, argv[1]); // a faire
+	init_struct(&vars, argv[1]); // a faire
 	
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
@@ -208,12 +237,12 @@ int	main(void)
 	if (!vars.addr)
 		merror("Error with mlx_init\n");
 
-	draw_fractal(t_vars vars);
+	draw_fractal(&vars);
 	//test pour voir le fonctionnement
-	my_mlx_pixel_put(&vars, 50, 50, 0x00FF0000);
+/*	my_mlx_pixel_put(&vars, 50, 50, 0x00FF0000);
 	my_mlx_pixel_put(&vars, 50, 75, 0x00FF0000);
 	my_mlx_pixel_put(&vars, 75, 50, 0x00FF0000);
-	my_mlx_pixel_put(&vars, 75, 75, 0x00FF0000);
+	my_mlx_pixel_put(&vars, 75, 75, 0x00FF0000);*/
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
