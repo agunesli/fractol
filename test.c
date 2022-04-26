@@ -143,12 +143,13 @@ void	init_struct(t_vars *vars, char *fract)
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
-
-	dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
-	*(unsigned int*)dst = color;
+	
+	if (x > -1 && y > -1 && x < WIDTH && y < HEIGHT)
+	{
+		dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
+		*(unsigned int*)dst = color;
+	}
 }
-
-
 
 void	mandelbrot(t_vars *vars,  t_complex c)
 {
@@ -171,11 +172,15 @@ void	mandelbrot(t_vars *vars,  t_complex c)
 		i++;
 	}
 //	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
-/*	if (dist < vars->xmax)
+	if (dist < vars->xmax)
 	{
 		ft_putstr("bouh\n"); ///
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, c.r, c.i);
-	}*/
+		my_mlx_pixel_put(vars, c.r, c.i, 0x00FF0000);
+//		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, c.r, c.i);
+	}
+	else
+		my_mlx_pixel_put(vars, c.r, c.i, 0x000000);
+
 }
 
 void	draw_mandelbrot(t_vars *vars)
