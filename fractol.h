@@ -78,6 +78,9 @@ typedef struct  s_vars {
         int     endian;
 }	t_vars;
 
+//mandelbrot.c
+void    mandelbrot(t_vars *vars,  t_complex c);
+void    draw_mandelbrot(t_vars *vars);
 
 // utils.c
 int	ft_strlen(char *str);
