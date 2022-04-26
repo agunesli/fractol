@@ -1,36 +1,46 @@
 #include "fractol.h"
+#include <stdio.h>
 
 void    mandelbrot(t_vars *vars,  t_complex c)
 {
-        int     i;
+        double   i;
         double  dist;
         double  tmp;
         t_complex       z;
 
         z.r = 0;
         z.i = 0;
-        dist = z.r * z.r + z.i * z.i;
-        tmp = 0;
+    //    dist = sqrt(z.r * z.r + z.i * z.i);
         i = 0;
-        while (i < vars->iteri)
+       	tmp = 0;
+        while (i < vars->iteri /*&& dist < vars->xmax*/)
         {
                 tmp = z.r;
                 z.r = z.r * z.r - z.i * z.i + c.r;
                 z.i = 2 * z.i * tmp + c.i;
-                dist = z.r * z.r + z.i * z.i;
+      //          dist = sqrt(z.r * z.r + z.i * z.i);
                 i++;
         }
-        if (dist < vars->xmax)
-                my_mlx_pixel_put(vars, c.r, c.i, 0x00FF0000);
-        else
-                my_mlx_pixel_put(vars, c.r, c.i, 0x000000);
+	printf("dist = %f\n",sqrt(z.r * z.r + z.i * z.i));
+        if (sqrt(z.r * z.r + z.i * z.i) < vars->xmax)
+	{
+		printf("x = %f y = %f ",c.r,c.i);
+		printf("red\n");
+                my_mlx_pixel_put(vars, c.r, c.i, 0xFF0000);
+        }
+	else
+	{
+	//	printf("x = %f y = %f ",c.r,c.i);
+	//	printf("white\n");
+                my_mlx_pixel_put(vars, c.r, c.i, 0xFFFFFF);
+	}
 }
 
 void    draw_mandelbrot(t_vars *vars)
 {
 
-        int     x;
-        int     y;
+        double	x;
+       	double	y;
         t_complex       c;
 
         y = 0;

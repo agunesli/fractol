@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/04/25 17:39:48 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/04/26 23:16:48 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct  s_vars {
 //mandelbrot.c
 void    mandelbrot(t_vars *vars,  t_complex c);
 void    draw_mandelbrot(t_vars *vars);
+
+void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 
 // utils.c
 int	ft_strlen(char *str);
