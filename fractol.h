@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/04/26 23:16:48 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:19:04 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define JULIA 2
 # define KOCH 3
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 180
+# define HEIGHT 180
 
 # define ESC		65307
 # define W		119

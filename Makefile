@@ -15,7 +15,7 @@ RM	=	rm -rf
 	$(CC) -I/usr/include -Imlx -O3 -c $< -o $@	
 
 $(NAME):$(OBJ_M) $(SRC_H)
-	$(CC) $(OBJ_M) -g3 -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ_M) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
 
 all:	$(NAME)
 

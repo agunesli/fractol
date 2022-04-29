@@ -3,29 +3,37 @@
 
 void    mandelbrot(t_vars *vars,  t_complex c)
 {
-        double   i;
+        int  i;
         double  dist;
         double  tmp;
         t_complex       z;
 
         z.r = 0;
         z.i = 0;
-    //    dist = sqrt(z.r * z.r + z.i * z.i);
+    	dist = z.r * z.r + z.i * z.i;
         i = 0;
        	tmp = 0;
-        while (i < vars->iteri /*&& dist < vars->xmax*/)
+      	printf("x = %f y = %f ",c.r,c.i);
+        while (i < vars->iteri && dist < vars->xmax * vars->xmax)
         {
                 tmp = z.r;
                 z.r = z.r * z.r - z.i * z.i + c.r;
                 z.i = 2 * z.i * tmp + c.i;
-      //          dist = sqrt(z.r * z.r + z.i * z.i);
+     	        dist = z.r * z.r + z.i * z.i;
+		printf("z.r = %f z.i = %f => dist %f \n",z.r,z.i, dist);
                 i++;
         }
-	printf("dist = %f\n",sqrt(z.r * z.r + z.i * z.i));
+	printf("dist = %f et i = %d\n", dist, i);
+	if (i == vars->iteri)
+                my_mlx_pixel_put(vars, c.r, c.i, 0xFF0000);
+	else
+                my_mlx_pixel_put(vars, c.r, c.i, 0xFFFFFF);
+
+/*//	printf("dist = %f\n",sqrt(z.r * z.r + z.i * z.i));
         if (sqrt(z.r * z.r + z.i * z.i) < vars->xmax)
 	{
-		printf("x = %f y = %f ",c.r,c.i);
-		printf("red\n");
+//		printf("x = %f y = %f ",c.r,c.i);
+//		printf("red\n");
                 my_mlx_pixel_put(vars, c.r, c.i, 0xFF0000);
         }
 	else
@@ -33,7 +41,7 @@ void    mandelbrot(t_vars *vars,  t_complex c)
 	//	printf("x = %f y = %f ",c.r,c.i);
 	//	printf("white\n");
                 my_mlx_pixel_put(vars, c.r, c.i, 0xFFFFFF);
-	}
+	}*/
 }
 
 void    draw_mandelbrot(t_vars *vars)

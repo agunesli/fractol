@@ -127,7 +127,7 @@ void	init_struct(t_vars *vars, char *fract)
 	vars->ymax = 5;
 	vars->ymin = -5;
        //	init_max_min(vars);
-        vars->iteri = 50;
+        vars->iteri = 10;
 	/*vars->x_coor;
         vars->y_coor;
         vars->x_img;
