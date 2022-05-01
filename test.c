@@ -116,7 +116,7 @@ void	init_struct(t_vars *vars, char *fract)
 	vars->fractal = found_fractal(fract);
 	vars->mlx = NULL;
         vars->win = NULL;
-        vars->zoom = 1;
+        vars->zoom = 50;
 	//pour julia
 	if (vars->fractal == JULIA)
         	vars->lock = 0;
@@ -174,7 +174,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
 	
-	init_struct(&vars, argv[1]); // a faire
+	init_struct(&vars, argv[1]); // a finir
 	
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
@@ -189,6 +189,7 @@ int	main(int argc, char **argv)
 	if (!vars.addr)
 		merror("Error with mlx_init\n");
 
+
 	draw_fractal(&vars);
 	//test pour voir le fonctionnement
 /*	my_mlx_pixel_put(&vars, 50, 50, 0x00FF0000);
@@ -196,8 +197,9 @@ int	main(int argc, char **argv)
 	my_mlx_pixel_put(&vars, 75, 50, 0x00FF0000);
 	my_mlx_pixel_put(&vars, 75, 75, 0x00FF0000);*/
 
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
-	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
+//	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
+//	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
+	mlx_hook(vars.win, 2, 4, ft_close, &vars);
 //	mlx_hook(vars.win, 4, 1L<<5, ft_close, &vars);
 	mlx_hook(vars.win, 17, 0, ft_close, &vars); // technique pierre 
 //	mlx_hook(vars.win, 4, 1L<<2, ft_close, &vars); // press_mouse
