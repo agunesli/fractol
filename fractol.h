@@ -40,6 +40,7 @@
 # define M_CLICKL	1	
 # define M_CLICKR	3
 # define M_CLICKS	2
+# define C		99
 
 typedef struct  s_complex
 {
@@ -60,11 +61,12 @@ typedef struct  s_vars {
         int     fractal;
 	int	lock; //pour julia 
 	double	zoom;
+	double	iter;
+//	int	color;
 	double	xmin;
 	double	ymin;
 	double	xmax;
 	double	ymax;
-	double	iteri;
 	double	x_coor;
 	double	y_coor;
 	double	x_img;

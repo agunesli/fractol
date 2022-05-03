@@ -1,7 +1,7 @@
 #include "fractol.h"
 #include <stdio.h>
 
-void    mandelbrot(t_vars *vars,  t_complex c)
+int    mandelbrot(t_vars *vars,  t_complex c)
 {
         int  i;
         double  dist;
@@ -14,7 +14,7 @@ void    mandelbrot(t_vars *vars,  t_complex c)
         i = 0;
        	tmp = 0;
 //      printf("x = %f y = %f ",c.r,c.i);
-        while (i < vars->iteri && dist < vars->xmax)
+        while (i < vars->iteri && dist < 4) 
         {
                 tmp = z.r;
                 z.r = z.r * z.r - z.i * z.i + c.r;
@@ -23,25 +23,8 @@ void    mandelbrot(t_vars *vars,  t_complex c)
 //		printf("z.r = %f z.i = %f => dist %f \n",z.r,z.i, dist);
                 i++;
         }
+	return (i);
 //	printf("dist = %f et i = %d\n", dist, i);
-	if (i == vars->iteri)
-                my_mlx_pixel_put(vars, c.r, c.i, 0xFF0000);
-	else
-                my_mlx_pixel_put(vars, c.r, c.i, 0xFFFFFF);
-
-/*//	printf("dist = %f\n",sqrt(z.r * z.r + z.i * z.i));
-        if (sqrt(z.r * z.r + z.i * z.i) < vars->xmax)
-	{
-//		printf("x = %f y = %f ",c.r,c.i);
-//		printf("red\n");
-                my_mlx_pixel_put(vars, c.r, c.i, 0xFF0000);
-        }
-	else
-	{
-	//	printf("x = %f y = %f ",c.r,c.i);
-	//	printf("white\n");
-                my_mlx_pixel_put(vars, c.r, c.i, 0xFFFFFF);
-	}*/
 }
 
 void    draw_mandelbrot(t_vars *vars)
@@ -50,8 +33,14 @@ void    draw_mandelbrot(t_vars *vars)
         double	x;
        	double	y;
         t_complex       c;
+	int i;
 
-        y = 0;
+	i = 0;
+	vars->xmin = ((vars->x_img + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
+	vars->ymin = ((vars->y_img + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
+	vars->xmax = -vars->xmin;
+	vars->ymax = -vars->ymin;
+	y = 0;
         while (y < HEIGHT)
         {
                 x = 0;
@@ -59,10 +48,14 @@ void    draw_mandelbrot(t_vars *vars)
                 {
                         c.r = x / vars->zoom + vars->x.min;
                         c.i = y / vars->zoom + vars->y.min;
-                        mandelbrot(vars, c);
+        		i =  mandelbrot(vars, c);
+			if (i == vars->iteri)
+        	        	my_mlx_pixel_put(vars, x , y, 0xFF0000);
+			else
+        	       		my_mlx_pixel_put(vars, x, y, 0xFFFFFF);
                         x++;
                 }
                 y++;
         }
-	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 }
