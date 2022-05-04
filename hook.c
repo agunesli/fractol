@@ -66,17 +66,17 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
-	if (button == 4 || button == 1)
+	if (button == 4)
 	{
-		vars->zoom = 0.80;
-		apply_zoom(x, y, vars);
+	//	vars->zoom = 0.80;
 		vars->iter -= 5;
-	}
-	else if (button == 5 || button == 2)
-	{
-		vars->zoom = 1.20;
 		apply_zoom(x, y, vars);
+	}
+	else if (button == 5)
+	{
+	//	vars->zoom = 1.20;
 		vars->iter += 5;
+		apply_zoom(x, y, vars);
 	}
 	draw(vars);
 	return (0);
