@@ -14,7 +14,7 @@ int    mandelbrot(t_vars *vars,  t_complex c)
         i = 0;
        	tmp = 0;
 //      printf("x = %f y = %f ",c.r,c.i);
-        while (i < vars->iteri && dist < 4) 
+        while (i < vars->iter && dist < 4) 
         {
                 tmp = z.r;
                 z.r = z.r * z.r - z.i * z.i + c.r;
@@ -46,10 +46,10 @@ void    draw_mandelbrot(t_vars *vars)
                 x = 0;
                 while (x < WIDTH)
                 {
-                        c.r = x / vars->zoom + vars->x.min;
-                        c.i = y / vars->zoom + vars->y.min;
+                        c.r = x / vars->zoom + vars->xmin;
+                        c.i = y / vars->zoom + vars->ymin;
         		i =  mandelbrot(vars, c);
-			if (i == vars->iteri)
+			if (i == vars->iter)
         	        	my_mlx_pixel_put(vars, x , y, 0xFF0000);
 			else
         	       		my_mlx_pixel_put(vars, x, y, 0xFFFFFF);

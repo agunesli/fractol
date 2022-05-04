@@ -28,34 +28,29 @@ int	ft_close(int keycode, t_vars *vars)
 	mlx_destroy_image(vars->mlx, vars->img);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
-	// une fonction free 
 	exit(0);
 	return (0);
 }
-
-void	init_struct(t_vars *vars, char *fract)
+/*
+int	ft_close(int keycode, t_vars *vars)
 {
-	vars->fractal = found_fractal(fract);
-	vars->mlx = mlx_init();
-	if (!vars->mlx)
-		merror("Error with mlx_init\n");
-	vars->win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "fractol");
-	if (!vars->win)
-		merror("Error with mlx_nex_window\n");
-	vars->img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	if (!vars->img)
-		merror("Error with mlx_new_image\n");
-	vars->addr = mlx_get_data_addr(vars.img, &vars.bpp, &vars.line_length, &vars.endian);
-	if (!vars->addr)
-		merror("Error with mlx_init\n");
-	init_data(vars);
+	if (keycode == ESC)
+	{
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_destroy_image(vars->mlx, vars->img);
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_display(vars->mlx);
+		// une fonction free 
+		exit(0);
+	}
+	return (0);
 }
-
+*/
 void	init_data(t_vars *vars)
 {
         vars->x_img = 0;
         vars->y_img = 0;
-	if (vars->fractal == MENDELBROT)
+	if (vars->fractal == MANDELBROT)
 	{
 		vars->iter = 80;
 		vars->zoom = 280;
@@ -68,11 +63,11 @@ void	init_data(t_vars *vars)
 		vars->zoom = 300;
 	//	vars->color = 0;
         	vars->lock = 0;
-		remarkable_julias(d);
+	//	remarkable_julias(d);
 	}
 	else if (vars->fractal == KOCH) // a faire
 	{
-		vars->max = 100;
+		vars->iter = 100;
 		vars->zoom = 300;
 	//	vars->color = 2;
         	vars->lock = 1;
@@ -82,6 +77,23 @@ void	init_data(t_vars *vars)
         vars->y_coor;*/
 }
 
+void	init_struct(t_vars *vars, char *fract)
+{
+	vars->fractal = found_fractal(fract);
+	vars->mlx = mlx_init();
+	if (!vars->mlx)
+		merror("Error with mlx_init\n");
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "fractol");
+	if (!vars->win)
+		merror("Error with mlx_nex_window\n");
+	vars->img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+	if (!vars->img)
+		merror("Error with mlx_new_image\n");
+	vars->addr = mlx_get_data_addr(vars->img, &vars->bpp, &vars->line_length, &vars->endian);
+	if (!vars->addr)
+		merror("Error with mlx_init\n");
+	init_data(vars);
+}
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
@@ -94,14 +106,14 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 	}
 }
 
-void	draw_fractal(t_vars *vars)
+void	draw(t_vars *vars)
 {
 	if (vars->fractal == MANDELBROT)
 		draw_mandelbrot(vars);
-	else if (vars->fractal == JULIA)
+/*	else if (vars->fractal == JULIA)
 		draw_julia(vars);
-	else if (vars->fratal == KOCH)
-		draw_koch(vars);
+	else if (vars->fractal == KOCH)
+		draw_koch(vars);*/
 	else
 		merror("Probleme avec nom de la fractal\n");
 //	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
@@ -117,17 +129,17 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
 	init_struct(&vars, argv[1]);
-	draw_fractal(&vars);
+	draw(&vars);
 
 	// a travailler
-	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
+//	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
 //	mlx_hook(vars.win, 4, 1L<<5, ft_close, &vars);
 	mlx_hook(vars.win, 17, 0, ft_close, &vars); // technique pierre 
 //	mlx_hook(vars.win, 4, 1L<<2, ft_close, &vars); // press_mouse
 //	mlx_hook(vars.win, 6, 1L<<6, mouse_move, &vars);
 
-//	mlx_key_hook(vars.win, key_hook, &vars);
-//	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

@@ -1,18 +1,4 @@
-int	key_hook(int keycode, t_vars *vars)
-{
-	if (keycode == ESC)
-		ft_close(keycode, vars);
-	else if (keycode == SPC)
-		vars->lock = !vars->lock;
-	else if (keycode == UP || keycode == DOWN \
-	|| keycode == LEFT || keycode == RIGHT \
-	|| keycode == A || keycode == S \
-	|| keycode == W || keycode == D)
-		move_fractal(keycode, t);
-/*	else if (keycode == C)
-		color_change(vars);*/
-	return (0);
-}
+#include "fractol.h"
 
 void	move_fractal(int keycode, t_vars *vars)
 {
@@ -43,6 +29,22 @@ void	move_fractal(int keycode, t_vars *vars)
 	draw(vars);
 }
 
+int	key_hook(int keycode, t_vars *vars)
+{
+	if (keycode == ESC)
+		ft_close(keycode, vars);
+	else if (keycode == ESP)
+		vars->lock = !vars->lock;
+	else if (keycode == UP || keycode == DOWN \
+	|| keycode == LEFT || keycode == RIGHT \
+	|| keycode == A || keycode == S \
+	|| keycode == W || keycode == D)
+		move_fractal(keycode, vars);
+/*	else if (keycode == C)
+		color_change(vars);*/
+	return (0);
+}
+
 static double	interpolate(double start, double end, double inter)
 {
 	return (start + ((end - start) * inter));
@@ -53,7 +55,7 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	t_complex	mouse;
 	double		inter;
 
-	inter = 1.0 / t->zoom;
+	inter = 1.0 / vars->zoom;
 	mouse.r = x / (WIDTH / (vars->xmax - vars->xmin)) + vars->xmin;
 	mouse.i = y / (HEIGHT / (vars->ymax - vars->ymin)) + vars->ymin;
 	vars->xmin = interpolate(mouse.r, vars->xmin, inter);

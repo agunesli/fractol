@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/04/29 17:19:04 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:51:25 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define JULIA 2
 # define KOCH 3
 
-# define WIDTH 180
-# define HEIGHT 180
+# define WIDTH 1200
+# define HEIGHT 800
 
 # define ESC		65307
 # define W		119
@@ -80,8 +80,12 @@ typedef struct  s_vars {
         int     endian;
 }	t_vars;
 
+//test.c
+void    draw(t_vars *vars);
+int     ft_close(int keycode, t_vars *vars);
+
 //mandelbrot.c
-void    mandelbrot(t_vars *vars,  t_complex c);
+int    mandelbrot(t_vars *vars,  t_complex c);
 void    draw_mandelbrot(t_vars *vars);
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
@@ -92,5 +96,10 @@ void	ft_putstr(char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	found_fractal(char *fract);
 void	merror(char *str);
+
+// hook
+int     mouse_hook(int button, int x, int y, t_vars *vars);
+int     key_hook(int keycode, t_vars *vars);
+
 
 #endif
