@@ -45,7 +45,7 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-static double	interpolate(double start, double end, double inter)
+/*static double	interpolate(double start, double end, double inter)
 {
 	return (start + ((end - start) * inter));
 }
@@ -62,20 +62,25 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	vars->ymin = interpolate(mouse.i, vars->ymin, inter);
 	vars->xmax = interpolate(mouse.r, vars->xmax, inter);
 	vars->ymax = interpolate(mouse.i, vars->xmax, inter);
-}
+}*/
 
+void	apply_zoom(int x, int y, t_vars *vars)
+{
+	vars->xmin = ((x + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
+	vars->ymin = ((y + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
+}
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	if (button == 4)
 	{
-	//	vars->zoom = 0.80;
-		vars->iter -= 5;
+		vars->zoom += 50;
+		vars->iter += 5;
 		apply_zoom(x, y, vars);
 	}
 	else if (button == 5)
 	{
-	//	vars->zoom = 1.20;
-		vars->iter += 5;
+		vars->zoom -= 50;
+		vars->iter -= 5;
 		apply_zoom(x, y, vars);
 	}
 	draw(vars);

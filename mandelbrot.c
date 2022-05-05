@@ -38,8 +38,8 @@ void    draw_mandelbrot(t_vars *vars)
 	i = 0;
 	vars->xmin = ((vars->x_img + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
 	vars->ymin = ((vars->y_img + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
-	vars->xmax = -vars->xmin;
-	vars->ymax = -vars->ymin;
+//	vars->xmax = -vars->xmin;
+//	vars->ymax = -vars->ymin;
 	y = 0;
         while (y < HEIGHT)
         {
@@ -50,7 +50,7 @@ void    draw_mandelbrot(t_vars *vars)
                         c.i = y / vars->zoom + vars->ymin;
         		i =  mandelbrot(vars, c);
 			if (i == vars->iter)
-        	        	my_mlx_pixel_put(vars, x , y, 0xFF0000);
+        	        	my_mlx_pixel_put(vars, x , y, 0x00000);
 			else
         	       		my_mlx_pixel_put(vars, x, y, 0xFFFFFF);
                         x++;

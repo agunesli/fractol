@@ -1,4 +1,5 @@
 SRC_M	= test.c utils.c mandelbrot.c hook.c
+#SRC_M	= take_key.c
 
 SRC_H	= fractol.h
 
