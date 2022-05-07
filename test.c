@@ -46,23 +46,24 @@ int	ft_close(int keycode, t_vars *vars)
 	return (0);
 }
 */
+
 void	init_data(t_vars *vars)
 {
-        vars->x_img = 0;
-        vars->y_img = 0;
+	vars->x_img = 0;
+	vars->y_img = 0;
 	if (vars->fractal == MANDELBROT)
 	{
 		vars->iter = 80;
 		vars->zoom = 280;
 	//	vars->color = 0;
-        	vars->lock = 1;
+		vars->lock = 1;
 	}
 	else if (vars->fractal == JULIA) // a faire
 	{
 		vars->iter = 300;
 		vars->zoom = 300;
 	//	vars->color = 0;
-        	vars->lock = 0;
+		vars->lock = 0;
 	//	remarkable_julias(d);
 	}
 	else if (vars->fractal == KOCH) // a faire
@@ -70,9 +71,8 @@ void	init_data(t_vars *vars)
 		vars->iter = 100;
 		vars->zoom = 300;
 	//	vars->color = 2;
-        	vars->lock = 1;
+		vars->lock = 1;
 	}
-
 /*	vars->x_coor;
         vars->y_coor;*/
 }
@@ -98,7 +98,7 @@ void	init_struct(t_vars *vars, char *fract)
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
-	
+
 	if (x > -1 && y > -1 && x < WIDTH && y < HEIGHT)
 	{
 		dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
@@ -119,13 +119,11 @@ void	draw(t_vars *vars)
 //	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 }
 
-
 // 1 => Mandelbrot 2 => Julia 3 => Flocon de Koch
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
 	init_struct(&vars, argv[1]);

@@ -66,6 +66,7 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 
 void	apply_zoom(int x, int y, t_vars *vars)
 {
+	printf("xmin is %f ymin is %f\n",vars->xmin, vars->ymin);
 	vars->xmin = ((x + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
 	vars->ymin = ((y + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
 }
