@@ -45,7 +45,7 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-/*static double	interpolate(double start, double end, double inter)
+static double	interpolate(double start, double end, double inter)
 {
 	return (start + ((end - start) * inter));
 }
@@ -62,14 +62,15 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	vars->ymin = interpolate(mouse.i, vars->ymin, inter);
 	vars->xmax = interpolate(mouse.r, vars->xmax, inter);
 	vars->ymax = interpolate(mouse.i, vars->xmax, inter);
-}*/
-
+}
+/*
 void	apply_zoom(int x, int y, t_vars *vars)
 {
 	printf("xmin is %f ymin is %f\n",vars->xmin, vars->ymin);
 	vars->xmin = ((x + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
 	vars->ymin = ((y + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
-}
+}*/
+
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	if (vars->fractal == JULIA && vars->lock == 0)

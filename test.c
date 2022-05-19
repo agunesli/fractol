@@ -93,11 +93,10 @@ void	init_data(t_vars *vars)
 
 void	init_struct(t_vars *vars, char *fract)
 {
-	vars->fractal = found_fractal(fract);
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		merror("Error with mlx_init\n");
-	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "fractol");
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, fract);
 	if (!vars->win)
 		merror("Error with mlx_nex_window\n");
 	vars->img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
@@ -153,6 +152,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
+	vars->fractal = found_fractal(argv[1]);
 	init_struct(&vars, argv[1]);
 	draw(&vars);
 
