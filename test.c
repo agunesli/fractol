@@ -53,15 +53,29 @@ void	init_data(t_vars *vars)
 	vars->y_img = 0;
 	if (vars->fractal == MANDELBROT)
 	{
-		vars->iter = 80;
-		vars->zoom = 280;
+		vars->color.rr = 30 % (0x4F + 0x01);
+		vars->color.rg = 90 % (0x4F + 0x01);
+		vars->color.rb = 60 % (0x4F + 0x01);
+		vars->xmin = -2.0;
+		vars->xmax = 2.0;
+		vars->ymin = -2.0;
+		vars->ymax = -2.0;
+		vars->iter = 100;
+		vars->zoom = 100;
 	//	vars->color = 0;
 		vars->lock = 1;
 	}
 	else if (vars->fractal == JULIA) // a faire
 	{
-		vars->iter = 300;
-		vars->zoom = 300;
+		vars->color.rr = 70 % (0x4F + 0x01);
+		vars->color.rg = 90 % (0x4F + 0x01);
+		vars->color.rb = 0 % (0x4F + 0x01);
+		vars->xmin = -2.0;
+		vars->xmax = 2.0;
+		vars->ymin = -2.0;
+		vars->ymax = 2.0;
+		vars->iter = 100;
+		vars->zoom = 100;
 	//	vars->color = 0;
 		vars->lock = 0;
 	//	remarkable_julias(d);
@@ -95,6 +109,19 @@ void	init_struct(t_vars *vars, char *fract)
 	init_data(vars);
 }
 
+void	my_mlx_pixel_put(t_vars *vars, int x, int y)
+{
+	int	nb;
+
+	if (x > -1 && y > -1 && x < WIDTH && y < HEIGHT)
+	{
+		nb = (y * vars->line_length + x * (vars->bpp / 8));
+		vars->addr[nb + 0] = vars->color.r;
+		vars->addr[nb + 1] = vars->color.g;
+		vars->addr[nb + 2] = vars->color.b;
+	}
+}
+/*
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
@@ -104,7 +131,7 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 		dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
 		*(unsigned int*)dst = color;
 	}
-}
+}*/
 
 void	draw(t_vars *vars)
 {

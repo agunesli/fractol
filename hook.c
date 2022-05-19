@@ -40,8 +40,8 @@ int	key_hook(int keycode, t_vars *vars)
 	|| keycode == A || keycode == S \
 	|| keycode == W || keycode == D)
 		move_fractal(keycode, vars);
-/*	else if (keycode == C)
-		color_change(vars);*/
+	else if (keycode == C)
+		color_shift(vars);
 	return (0);
 }
 
@@ -72,6 +72,13 @@ void	apply_zoom(int x, int y, t_vars *vars)
 }
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
+	if (vars->fractal == JULIA && vars->lock == 0)
+	{
+		// a travailler 
+		vars->p.x = 2 * (double)x / WIDTH - 1;
+		vars->p.y = 2 * (double)y / HEIGHT - 1;
+		draw(vars);
+	}
 	if (button == 4)
 	{
 		vars->zoom += 50;
@@ -87,3 +94,4 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	draw(vars);
 	return (0);
 }
+

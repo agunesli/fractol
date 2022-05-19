@@ -54,6 +54,17 @@ typedef struct	s_pixel
 	int		i;	
 }	t_pixel;
 
+typedef struct	s_color
+{
+	int	smooth;
+	int	r;
+	int	g;
+	int	b;
+	int	rr;
+	int	rg;
+	int	rb;
+	
+}	t_color;
 // bpp => bits_per_pixel;
 typedef struct  s_vars {
         void    *mlx;
@@ -71,8 +82,8 @@ typedef struct  s_vars {
 	double	y_coor;
 	double	x_img;
 	double	y_img;
-	int	smooth;
 	t_pixel	data;
+	t_color	color;
         void    *img;
         char    *addr;
         int     bpp;
@@ -101,5 +112,8 @@ void	merror(char *str);
 int     mouse_hook(int button, int x, int y, t_vars *vars);
 int     key_hook(int keycode, t_vars *vars);
 
+// draw
+void	color(t_vars *vars, int i);
+void	color_shift(t_vars *vars);
 
 #endif

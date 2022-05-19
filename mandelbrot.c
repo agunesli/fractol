@@ -35,21 +35,22 @@ void	draw_mandelbrot(t_vars *vars)
 	int			i;
 
 	i = 0;
-	vars->xmin = ((vars->x_img + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
-	vars->ymin = ((vars->y_img + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
 	y = -1;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			c.r = x / vars->zoom + vars->xmin;
-			c.i = y / vars->zoom + vars->ymin;
+			c.r = x * (vars->xmax - vars->xmin) / WIDTH + vars->xmin;
+			c.i = y * (vars->ymax - vars->ymin) / HEIGHT + vars->ymin;
 			i = mandelbrot(vars, c);
-			if (i == vars->iter)
+			color(vars, i);
+			my_mlx_pixel_put(vars, x, y);
+		//	my_mlx_pixel_put(vars, x, y, 0x00000);
+/*			if (i == vars->iter)
 				my_mlx_pixel_put(vars, x, y, 0x00000);
 			else
-				my_mlx_pixel_put(vars, x, y, 0xFFFFFF);
+				my_mlx_pixel_put(vars, x, y, 0xFFFFFF);*/
 		}
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
