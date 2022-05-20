@@ -36,12 +36,12 @@ int	found_fractal(char *fract)
 		return (MANDELBROT);
 	else if (!ft_strncmp("Julia", fract, 6))
 		return (JULIA);
-	else if (!ft_strncmp("Flocon de Koch", fract, 14))
-		return (KOCH);
+	else if (!ft_strncmp("Buddhabrot", fract, 14))
+		return (BUDDHABROT);
 	else
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr(" --> Mandelbort\n --> Julia\n --> Flocon de Koch\n");
+		ft_putstr(" --> Mandelbort\n --> Julia\n --> Buddhabrot\n");
 		exit(EXIT_FAILURE);
 		return (0);
 	}

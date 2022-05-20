@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/04 14:51:25 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/19 23:21:51 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define MANDELBROT 1
 # define JULIA 2
-# define KOCH 3
+# define BUDDHABROT 3
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -37,7 +37,7 @@
 # define ENTRER		65293
 # define M_UP		5
 # define M_DOWN		4
-# define M_CLICKL	1	
+# define M_CLICKL	1
 # define M_CLICKR	3
 # define M_CLICKS	2
 # define C		99
@@ -51,7 +51,7 @@ typedef struct  s_complex
 typedef struct	s_pixel
 {
 	t_complex	c;
-	int		i;	
+	int		i;
 }	t_pixel;
 
 typedef struct	s_color
@@ -63,14 +63,14 @@ typedef struct	s_color
 	int	rr;
 	int	rg;
 	int	rb;
-	
+
 }	t_color;
 // bpp => bits_per_pixel;
 typedef struct  s_vars {
         void    *mlx;
         void    *win;
         int     fractal;
-	int	lock; //pour julia 
+	int	lock; //pour julia
 	double	zoom;
 	double	iter;
 //	int	color;
@@ -93,13 +93,14 @@ typedef struct  s_vars {
 
 //test.c
 void    draw(t_vars *vars);
-int     ft_close(int keycode, t_vars *vars);
+int     ft_close(t_vars *vars);
 
 //mandelbrot.c
 int    mandelbrot(t_vars *vars,  t_complex c);
 void    draw_mandelbrot(t_vars *vars);
 
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+void	my_mlx_pixel_put(t_vars *vars, int x, int y);
+void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
 
 // utils.c
 int	ft_strlen(char *str);
@@ -115,5 +116,7 @@ int     key_hook(int keycode, t_vars *vars);
 // draw
 void	color(t_vars *vars, int i);
 void	color_shift(t_vars *vars);
+
+void	draw_buddhabrot(t_vars *vars);
 
 #endif

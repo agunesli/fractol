@@ -1,28 +1,7 @@
 #include "fractol.h"
+#include <stdio.h>
 
-/*
-int	get_transparency(int trgb)
-{
-	return ((trgb >> 24) & 0xFF);
-}
-
-int	get_red(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_green(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_blue(int trgb)
-{
-	return (trgb & 0xFF);
-}
-*/
-
-int	ft_close(int keycode, t_vars *vars)
+int	ft_close(t_vars *vars)
 {
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_destroy_image(vars->mlx, vars->img);
@@ -31,21 +10,6 @@ int	ft_close(int keycode, t_vars *vars)
 	exit(0);
 	return (0);
 }
-/*
-int	ft_close(int keycode, t_vars *vars)
-{
-	if (keycode == ESC)
-	{
-		mlx_clear_window(vars->mlx, vars->win);
-		mlx_destroy_image(vars->mlx, vars->img);
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-		// une fonction free 
-		exit(0);
-	}
-	return (0);
-}
-*/
 
 void	init_data(t_vars *vars)
 {
@@ -56,10 +20,10 @@ void	init_data(t_vars *vars)
 		vars->color.rr = 30 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
 		vars->color.rb = 60 % (0x4F + 0x01);
-		vars->xmin = -2.0;
-		vars->xmax = 2.0;
-		vars->ymin = -2.0;
-		vars->ymax = -2.0;
+		vars->xmin = -2.1;
+		vars->xmax = 0.6;
+		vars->ymin = -1.2;
+		vars->ymax = 1.2;
 		vars->iter = 100;
 		vars->zoom = 100;
 	//	vars->color = 0;
@@ -80,11 +44,18 @@ void	init_data(t_vars *vars)
 		vars->lock = 0;
 	//	remarkable_julias(d);
 	}
-	else if (vars->fractal == KOCH) // a faire
+	else if (vars->fractal == BUDDHABROT) // a faire
 	{
+		vars->color.rr = 30 % (0x4F + 0x01);
+		vars->color.rg = 90 % (0x4F + 0x01);
+		vars->color.rb = 60 % (0x4F + 0x01);
+		vars->xmin = -2.1;
+		vars->xmax = 0.6;
+		vars->ymin = -1.2;
+		vars->ymax = 1.2;
 		vars->iter = 100;
-		vars->zoom = 300;
-	//	vars->color = 2;
+		vars->zoom = 100;
+	//	vars->color = 0;
 		vars->lock = 1;
 	}
 /*	vars->x_coor;
@@ -120,8 +91,8 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y)
 		vars->addr[nb + 2] = vars->color.b;
 	}
 }
-/*
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
+
+void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
 
@@ -130,39 +101,35 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 		dst = vars->addr + (y * vars->line_length + x * (vars->bpp / 8));
 		*(unsigned int*)dst = color;
 	}
-}*/
+}
 
 void	draw(t_vars *vars)
 {
 	if (vars->fractal == MANDELBROT)
 		draw_mandelbrot(vars);
 /*	else if (vars->fractal == JULIA)
-		draw_julia(vars);
-	else if (vars->fractal == KOCH)
-		draw_koch(vars);*/
+		draw_julia(vars);*/
+	else if (vars->fractal == BUDDHABROT)
+		draw_buddhabrot(vars);
 	else
 		merror("Probleme avec nom de la fractal\n");
 //	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 }
 
-// 1 => Mandelbrot 2 => Julia 3 => Flocon de Koch
+// 1 => Mandelbrot 2 => Julia 3 =>  Buddhabrot
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
 	if (argc != 2)
 		merror("Un seul argument est attendu\n");
-	vars->fractal = found_fractal(argv[1]);
+	vars.fractal = found_fractal(argv[1]);
+	// printf("fract is %d\n", vars.fractal);
 	init_struct(&vars, argv[1]);
+	// printf("La structure a ete init\n");
 	draw(&vars);
-
-	// a travailler
-//	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
-//	mlx_hook(vars.win, 4, 1L<<5, ft_close, &vars);
-	mlx_hook(vars.win, 17, 0, ft_close, &vars); // technique pierre 
-//	mlx_hook(vars.win, 4, 1L<<2, ft_close, &vars); // press_mouse
-//	mlx_hook(vars.win, 6, 1L<<6, mouse_move, &vars);
-
+	// printf("Le dessin est fini\n");
+	mlx_hook(vars.win, 17, 0, ft_close, &vars); // technique pierre
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);

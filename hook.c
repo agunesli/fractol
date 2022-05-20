@@ -8,13 +8,13 @@ void	move_fractal(int keycode, t_vars *vars)
 	r.i = vars->ymax - vars->ymin;
 	if (keycode == DOWN || keycode == S)
 	{
-		vars->ymin -= r.i * 0.05;
-		vars->ymax -= r.i * 0.05;
+		vars->ymin += r.i * 0.05;
+		vars->ymax += r.i * 0.05;
 	}
 	else if (keycode == UP || keycode == W)
 	{
-		vars->ymin += r.i * 0.05;
-		vars->ymax += r.i * 0.05;
+		vars->ymin -= r.i * 0.05;
+		vars->ymax -= r.i * 0.05;
 	}
 	else if (keycode == RIGHT || keycode == D)
 	{
@@ -32,7 +32,7 @@ void	move_fractal(int keycode, t_vars *vars)
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == ESC)
-		ft_close(keycode, vars);
+		ft_close(vars);
 	else if (keycode == ESP)
 		vars->lock = !vars->lock;
 	else if (keycode == UP || keycode == DOWN \
@@ -75,22 +75,22 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
-		// a travailler 
-		vars->p.x = 2 * (double)x / WIDTH - 1;
-		vars->p.y = 2 * (double)y / HEIGHT - 1;
-		draw(vars);
+		// a travailler
+//		vars->p.x = 2 * (double)x / WIDTH - 1;
+//		vars->p.y = 2 * (double)y / HEIGHT - 1;
+//		draw(vars);
 	}
 	if (button == 4)
 	{
 		vars->zoom += 50;
-		vars->iter += 5;
 		apply_zoom(x, y, vars);
+		vars->iter += 5;
 	}
 	else if (button == 5)
 	{
 		vars->zoom -= 50;
-		vars->iter -= 5;
 		apply_zoom(x, y, vars);
+		vars->iter -= 5;
 	}
 	draw(vars);
 	return (0);
