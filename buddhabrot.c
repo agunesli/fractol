@@ -94,16 +94,9 @@ void	draw_buddhabrot(t_vars *vars)
 			printf("Les donnees de c sont envoyees\n");
 			buddhabrot(vars, c);
 			x++;
-//			printf(" i = %d \n", i);
-			// color(vars, i);
-			// my_mlx_pixel_put(vars, x, y);
-		//	my_mlx_pixel_put(vars, x, y, 0x00000);
-			// if (i == vars->iter)
-			// 	my_mlx_pixel_put(vars, x, y, 0x00000);
-			// else
-			// 	my_mlx_pixel_put(vars, x, y, 0xFFFFFF);
 		}
 		y++;
+		printf("Une ligne est fini y = %d!!!\n", y);
 	}
 	printf("FINI !\n");
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);

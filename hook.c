@@ -82,15 +82,15 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	}
 	if (button == 4)
 	{
-		vars->zoom += 50;
+		vars->zoom = 1.80;;
 		apply_zoom(x, y, vars);
-		vars->iter += 5;
+		vars->iter -= 5;
 	}
 	else if (button == 5)
 	{
-		vars->zoom -= 50;
+		vars->zoom = 1.20;
 		apply_zoom(x, y, vars);
-		vars->iter -= 5;
+		vars->iter += 5;
 	}
 	draw(vars);
 	return (0);
