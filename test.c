@@ -92,7 +92,12 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	if (argc != 2)
-		merror("Un seul argument est attendu\n");
+	{
+		ft_putstr("usage : fractol [fractals]\n fractals : \n");
+		ft_putstr(" --> Mandelbort\n --> Julia\n --> Buddhabrot\n");
+		exit(EXIT_FAILURE);
+		return (0);
+	}
 	vars.fractal = found_fractal(argv[1]);
 //	printf("fract is %d\n", vars.fractal);
 	init_struct(&vars, argv[1]);

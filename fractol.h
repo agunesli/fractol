@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 16:53:48 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:02:42 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define JULIA 1
 # define BUDDHABROT 2
 
-# define WIDTH 2000
-# define HEIGHT 1500
+# define WIDTH 1200
+# define HEIGHT 800
 
 # define ESC		65307
 # define W		119
