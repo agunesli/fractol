@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/19 23:21:51 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:25:10 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <math.h>
 # include "mlx/mlx.h"
 
-# define MANDELBROT 1
-# define JULIA 2
-# define BUDDHABROT 3
+# define MANDELBROT 0
+# define JULIA 1
+# define BUDDHABROT 2
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -41,22 +41,16 @@
 # define M_CLICKR	3
 # define M_CLICKS	2
 # define C		99
+# define M		109
 
-typedef struct  s_complex
+typedef struct s_complex
 {
-        double  r;
-        double  i;
-}       t_complex;
+	double	r;
+	double	i;
+}	t_complex;
 
-typedef struct	s_pixel
+typedef struct s_color
 {
-	t_complex	c;
-	int		i;
-}	t_pixel;
-
-typedef struct	s_color
-{
-	int	smooth;
 	int	r;
 	int	g;
 	int	b;
@@ -65,58 +59,60 @@ typedef struct	s_color
 	int	rb;
 
 }	t_color;
+
 // bpp => bits_per_pixel;
-typedef struct  s_vars {
-        void    *mlx;
-        void    *win;
-        int     fractal;
-	int	lock; //pour julia
-	double	zoom;
-	double	iter;
-//	int	color;
-	double	xmin;
-	double	ymin;
-	double	xmax;
-	double	ymax;
-	double	x_coor;
-	double	y_coor;
-	double	x_img;
-	double	y_img;
-	t_pixel	data;
-	t_color	color;
-        void    *img;
-        char    *addr;
-        int     bpp;
-        int     line_length;
-        int     endian;
+// lock for julia;
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*win;
+	int			fractal;
+	int			lock;
+	double		zoom;
+	double		iter;
+	double		xmin;
+	double		ymin;
+	double		xmax;
+	double		ymax;
+	t_complex	julia_ci;
+	t_color		color;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
 }	t_vars;
 
 //test.c
-void    draw(t_vars *vars);
-int     ft_close(t_vars *vars);
+void	draw(t_vars *vars);
+int		ft_close(t_vars *vars);
 
 //mandelbrot.c
-int    mandelbrot(t_vars *vars,  t_complex c);
-void    draw_mandelbrot(t_vars *vars);
-
-void	my_mlx_pixel_put(t_vars *vars, int x, int y);
-void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
+int		mandelbrot(t_vars *vars, t_complex c);
+void	draw_mandelbrot(t_vars *vars);
 
 // utils.c
-int	ft_strlen(char *str);
+int		ft_strlen(char *str);
 void	ft_putstr(char *str);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-int	found_fractal(char *fract);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		found_fractal(char *fract);
 void	merror(char *str);
 
 // hook
-int     mouse_hook(int button, int x, int y, t_vars *vars);
-int     key_hook(int keycode, t_vars *vars);
+int		mouse_hook(int button, int x, int y, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 
 // draw
 void	color(t_vars *vars, int i);
 void	color_shift(t_vars *vars);
+void	my_mlx_pixel_put(t_vars *vars, int x, int y);
+void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
 
+//julia
+int		julia(t_vars *vars, t_complex c);
+void	draw_julia(t_vars *vars);
+
+//buddhabrot
 void	draw_buddhabrot(t_vars *vars);
 
 #endif

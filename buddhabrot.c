@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 void	init_pixel(int pixel[WIDTH][HEIGHT])
+//void	init_pixel(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -13,6 +14,7 @@ void	init_pixel(int pixel[WIDTH][HEIGHT])
 		while (j < HEIGHT)
 		{
 			pixel[i][j] = 0;
+		//	my_mlx_pixel_put_color(vars, i, j, 0xFFFFFF);
 			j++;
 		}
 		i++;
@@ -39,21 +41,19 @@ void	draw_pixel(int pixel[WIDTH][HEIGHT], t_vars *vars)
 		}
 		i++;
 	}
-	printf("Le dessin des pixels est fini\n");
+//	printf("Le dessin des pixels est fini\n");
 }
 
-void	buddhabrot(t_vars *vars, t_complex c)
+void	buddhabrot(t_vars *vars, t_complex c, int pixel[WIDTH][HEIGHT])
 {
 	int			i;
 	int			x,y;
 	double		dist;
 	double		tmp;
 	t_complex	z;
-	int			pixel[WIDTH][HEIGHT];
 
 	z.r = 0;
 	z.i = 0;
-	init_pixel(pixel);
 	dist = z.r * z.r + z.i * z.i;
 	i = 0;
 	tmp = 0;
@@ -65,10 +65,12 @@ void	buddhabrot(t_vars *vars, t_complex c)
 		x = (z.r - vars->xmin) * vars->zoom;
 		y = (z.i - vars->ymin) * vars->zoom;
 		pixel[x][y] = 1;
+	//	my_mlx_pixel_put_color(vars, x, y, 0x00000);
 		// printf("on remplie le tablean pixel\n");
 		dist = z.r * z.r + z.i * z.i;
 		i++;
 	}
+//	printf("bouh\n");
 	// printf("Le tableau pixel est rempli\n");
 	if (i != vars->iter)
 		draw_pixel(pixel, vars);
@@ -80,10 +82,12 @@ void	draw_buddhabrot(t_vars *vars)
 	double		y;
 	t_complex	c;
 	int			i;
+	int			pixel[WIDTH][HEIGHT];
 
 	i = 0;
 	y = 0;
-	printf("Le dessin va etre commence\n");
+	init_pixel(pixel);
+//	printf("Le dessin va etre commence\n");
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -91,13 +95,13 @@ void	draw_buddhabrot(t_vars *vars)
 		{
 			c.r = x / vars->zoom + vars->xmin;
 			c.i = y / vars->zoom + vars->ymin;
-			printf("Les donnees de c sont envoyees\n");
-			buddhabrot(vars, c);
+			buddhabrot(vars, c, pixel);
 			x++;
+//			printf("Les donnees de c sont envoyees\n et x = %f",x);
 		}
 		y++;
-		printf("Une ligne est fini y = %d!!!\n", y);
+		printf("Une ligne est fini y = %f!!!\n", y);
 	}
-	printf("FINI !\n");
+//	printf("FINI !\n");
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 12:05:35 by agunesli          #+#    #+#             */
+/*   Updated: 2022/05/23 12:07:01 by agunesli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	move_fractal(int keycode, t_vars *vars)
@@ -42,6 +54,11 @@ int	key_hook(int keycode, t_vars *vars)
 		move_fractal(keycode, vars);
 	else if (keycode == C)
 		color_shift(vars);
+	else if (keycode == M)
+	{
+		vars->fractal += 1 % 3;
+		draw(vars);
+	}
 	return (0);
 }
 
@@ -71,26 +88,54 @@ void	apply_zoom(int x, int y, t_vars *vars)
 	vars->ymin = ((y + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
 }*/
 
+/*
+static void	apply_zoom(int x, int y, t_vars *vars)
+{
+	double h = 0.05;
+
+	vars->xmin = x + h;
+	vars->xmax = x - h;
+	vars->ymin = y + h;
+	vars->ymax = y - h;
+}
+*/
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
+	double	hx;
+	double	hy;
+
+	hx = 0.1;
+	hy = hx;
+//	double hx = IDTH / (vars->xmax - vars->xmin) + vars->xmin;
+//	double hy = HEIGHT / (vars->ymax - vars->ymin) + vars->ymin;
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
-		// a travailler
-//		vars->p.x = 2 * (double)x / WIDTH - 1;
-//		vars->p.y = 2 * (double)y / HEIGHT - 1;
-//		draw(vars);
+		vars->julia_ci.r = x;
+		vars->julia_ci.i = y;
+//		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
+//		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
+		draw(vars);
+//		write(1,"bouh\n",5);
 	}
 	if (button == 4)
 	{
-		vars->zoom = 1.80;;
-		apply_zoom(x, y, vars);
-		vars->iter -= 5;
+		vars->zoom += 100;
+		vars->xmin += hx;
+		vars->ymin += hy;
+		vars->xmax -= hx;
+		vars->ymax -= hy;
+//		apply_zoom(x, y, vars);
+		vars->iter += 5;
 	}
 	else if (button == 5)
 	{
-		vars->zoom = 1.20;
-		apply_zoom(x, y, vars);
-		vars->iter += 5;
+		vars->zoom -= 100;
+		vars->xmin -= hx;
+		vars->ymax += hy;
+		vars->ymin -= hy;
+		vars->xmax += hx;
+//		apply_zoom(x, y, vars);
+		vars->iter -= 5;
 	}
 	draw(vars);
 	return (0);
