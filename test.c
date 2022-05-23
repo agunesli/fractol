@@ -31,10 +31,12 @@ void	init_data(t_vars *vars)
 		vars->color.rr = 70 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
 		vars->color.rb = 0 % (0x4F + 0x01);
-		vars->xmin = -2.0;
-		vars->xmax = 2.0;
-		vars->ymin = -2.0;
-		vars->ymax = 2.0;
+		vars->xmin = -1;
+		vars->xmax = 1;
+		vars->ymin = -1.2;
+		vars->ymax = 1.2;
+		vars->julia_ci.r = 0.285;
+		vars->julia_ci.i = 0.01;
 		vars->iter = 100;
 		vars->zoom = 100;
 		vars->lock = 0;

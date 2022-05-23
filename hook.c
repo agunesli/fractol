@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:05:35 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:07:01 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:21:41 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	key_hook(int keycode, t_vars *vars)
 	}
 	return (0);
 }
-
+/*
 static double	interpolate(double start, double end, double inter)
 {
 	return (start + ((end - start) * inter));
@@ -79,7 +79,7 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	vars->ymin = interpolate(mouse.i, vars->ymin, inter);
 	vars->xmax = interpolate(mouse.r, vars->xmax, inter);
 	vars->ymax = interpolate(mouse.i, vars->xmax, inter);
-}
+}*/
 /*
 void	apply_zoom(int x, int y, t_vars *vars)
 {
@@ -110,11 +110,11 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 //	double hy = HEIGHT / (vars->ymax - vars->ymin) + vars->ymin;
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
-		vars->julia_ci.r = x;
-		vars->julia_ci.i = y;
-//		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
-//		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
-		draw(vars);
+//		vars->julia_ci.r = x;
+//		vars->julia_ci.i = y;
+		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
+		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
+//		draw(vars);
 //		write(1,"bouh\n",5);
 	}
 	if (button == 4)

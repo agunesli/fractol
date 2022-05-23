@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:08:04 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:08:07 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:05:00 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_strlen(char *str)
 
 void	ft_putstr(char *str)
 {
-	write(1, str, ft_strlen(str));
+	if (write(1, str, ft_strlen(str) == -1))
+		exit(0);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

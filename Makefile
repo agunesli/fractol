@@ -13,14 +13,13 @@ MLX	=	-g3 -lmlx -framework OpenGL -framework Appki
 RM	=	rm -rf
 
 %.o: %.c
-#	$(CC) $(FLAGS) -I/usr/include -Imlx -O3 -c $< -o $@	
-	$(CC) -I/usr/include -Imlx -O3 -c $< -o $@	# For linux
+	$(CC) $(FLAGS) -I/usr/include -Imlx -O3 -c $< -o $@	
+#	$(CC) -I/usr/include -Imlx -O3 -c $< -o $@	# For linux
 #	$(CC) -Imlx -c $< -o $@	 			# For mac os
 
 
 $(NAME):$(OBJ_M) $(SRC_H)
-	$(CC) $(OBJ_M) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) #for linux
-#	$(CC) $(OBJ_M) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) #for mac os
+	$(CC) $(OBJ_M) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
 
 all:	$(NAME)
 

@@ -81,10 +81,8 @@ void	draw_buddhabrot(t_vars *vars)
 	double		x;
 	double		y;
 	t_complex	c;
-	int			i;
 	int			pixel[WIDTH][HEIGHT];
 
-	i = 0;
 	y = 0;
 	init_pixel(pixel);
 //	printf("Le dessin va etre commence\n");

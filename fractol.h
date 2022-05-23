@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:25:10 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:53:48 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define JULIA 1
 # define BUDDHABROT 2
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 2000
+# define HEIGHT 1500
 
 # define ESC		65307
 # define W		119
@@ -109,7 +109,7 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y);
 void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
 
 //julia
-int		julia(t_vars *vars, t_complex c);
+int		julia(t_vars *vars, t_complex c, double x, double y);
 void	draw_julia(t_vars *vars);
 
 //buddhabrot
