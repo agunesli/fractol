@@ -7,6 +7,8 @@ int	ft_close(t_vars *vars)
 	mlx_destroy_image(vars->mlx, vars->img);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
+	if (vars->mlx)
+		free(vars->mlx);
 	exit(0);
 	return (0);
 }
@@ -60,17 +62,17 @@ void	init_struct(t_vars *vars, char *fract)
 {
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
-		merror("Error with mlx_init\n");
+		merror("Error with mlx_init\n", vars);
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, fract);
 	if (!vars->win)
-		merror("Error with mlx_nex_window\n");
+		merror("Error with mlx_nex_window\n", vars);
 	vars->img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	if (!vars->img)
-		merror("Error with mlx_new_image\n");
+		merror("Error with mlx_new_image\n", vars);
 	vars->addr = mlx_get_data_addr(vars->img, &vars->bpp,
 			&vars->line_length, &vars->endian);
 	if (!vars->addr)
-		merror("Error with mlx_init\n");
+		merror("Error with mlx_init\n", vars);
 	init_data(vars);
 }
 
@@ -83,7 +85,7 @@ void	draw(t_vars *vars)
 	else if (vars->fractal == BUDDHABROT)
 		draw_buddhabrot(vars);
 	else
-		merror("Probleme avec nom de la fractal\n");
+		merror("Probleme avec nom de la fractal\n", vars);
 }
 
 // 0 => Mandelbrot 1 => Julia 2 => Buddhabrot

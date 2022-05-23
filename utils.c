@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:08:04 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 23:05:30 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:23:06 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int	found_fractal(char *fract)
 	}
 }
 
-void	merror(char *str)
+void	merror(char *str, t_vars *vars)
 {
 	ft_putstr(str);
+	if (vars->mlx)
+		free(vars->mlx);
 	exit(EXIT_FAILURE);
 }

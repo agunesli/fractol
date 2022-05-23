@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 23:02:42 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:22:29 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		ft_strlen(char *str);
 void	ft_putstr(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		found_fractal(char *fract);
-void	merror(char *str);
+void	merror(char *str, t_vars *vars);
 
 // hook
 int		mouse_hook(int button, int x, int y, t_vars *vars);
