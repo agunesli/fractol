@@ -4,21 +4,18 @@
 int	julia(t_vars *vars, t_complex c, double x, double y)
 {
 	int			i;
-	double		dist;
 	double		tmp;
 	t_complex	z;
 
 	z.r = x / vars->zoom + vars->xmin;
 	z.i = y / vars->zoom + vars->ymin;
-	dist = z.r * z.r + z.i * z.i;
 	i = 0;
 	tmp = 0;
-	while (i < vars->iter && dist < 4)
+	while (i < vars->iter && (z.r * z.r + z.i * z.i) < 4)
 	{
 		tmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * tmp + c.i;
-		dist = z.r * z.r + z.i * z.i;
 		i++;
 	}
 	return (i);

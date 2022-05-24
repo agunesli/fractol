@@ -15,7 +15,27 @@ int	ft_close(t_vars *vars)
 
 void	init_data(t_vars *vars)
 {
-	if (vars->fractal == MANDELBROT)
+	vars->iter = 100;
+	vars->zoom = 100;
+	vars->lock = 1;
+	vars->color.rr = 30 % (0x4F + 0x01);
+	vars->color.rg = 90 % (0x4F + 0x01);
+	vars->color.rb = 60 % (0x4F + 0x01);
+	vars->xmin = -2;
+	vars->xmax = 2;
+	vars->ymin = -2;
+	vars->ymax = 2;
+	if (vars->fractal == JULIA) 
+	{
+		vars->julia_ci.r = 0.285;
+		vars->julia_ci.i = 0.01;
+	}
+	else
+	{
+		vars->julia_ci.r = 0;
+		vars->julia_ci.i = 0.01;
+	}
+/*	if (vars->fractal == MANDELBROT)
 	{
 		vars->color.rr = 30 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
@@ -24,11 +44,8 @@ void	init_data(t_vars *vars)
 		vars->xmax = 0.6;
 		vars->ymin = -1.2;
 		vars->ymax = 1.2;
-		vars->iter = 100;
-		vars->zoom = 100;
-		vars->lock = 1;
 	}
-	else if (vars->fractal == JULIA) // a faire
+	else if (vars->fractal == JULIA) 
 	{
 		vars->color.rr = 70 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
@@ -39,11 +56,8 @@ void	init_data(t_vars *vars)
 		vars->ymax = 0.1;
 		vars->julia_ci.r = 0.285;
 		vars->julia_ci.i = 0.01;
-		vars->iter = 100;
-		vars->zoom = 100;
-		vars->lock = 0;
 	}
-	else if (vars->fractal == BUDDHABROT) // a faire
+	else if (vars->fractal == BUDDHABROT)
 	{
 		vars->color.rr = 30 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
@@ -52,10 +66,7 @@ void	init_data(t_vars *vars)
 		vars->xmax = 0.6;
 		vars->ymin = -1.2;
 		vars->ymax = 1.2;
-		vars->iter = 100;
-		vars->zoom = 100;
-		vars->lock = 1;
-	}
+	}*/
 }
 
 void	init_struct(t_vars *vars, char *fract)
@@ -107,7 +118,7 @@ int	main(int argc, char **argv)
 	draw(&vars);
 //	printf("Le dessin est fini\n");
 	mlx_hook(vars.win, 17, 0, ft_close, &vars);
-	mlx_hook(vars.win, 6, 1L << 6, mouse_move, vars);
+	mlx_hook(vars.win, 6, 1L << 6, mouse_move, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);

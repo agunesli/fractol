@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:05:35 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/24 19:00:10 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/25 00:46:12 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 }
 */
 
-int	mouse_move(int x, int y, t_vars vars)
+int	mouse_move(int x, int y, t_vars *vars)
 {
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
@@ -106,8 +106,7 @@ int	mouse_move(int x, int y, t_vars vars)
 	}
 	return (0);
 }
-
-
+/*
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	double	hx;
@@ -115,6 +114,8 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 
 	hx = 0.1;
 	hy = hx;
+	(void)x;
+	(void)y;
 //	double hx = IDTH / (vars->xmax - vars->xmin) + vars->xmin;
 //	double hy = HEIGHT / (vars->ymax - vars->ymin) + vars->ymin;
 	if (button == 4)
@@ -142,34 +143,37 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 //	printf("xmin = %f, xmax = %f, ymin = %f, ymax = %f \n",vars->xmin, vars->xmax, vars->ymin, vars->ymax);
 	draw(vars);
 	return (0);
-}
-/*
+}*/
+
 // d->p.xmax += -(frac_width * d->p.zoom * ratio_x) / 200 + frac_width / 2;
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	double	hx;
 	double	hy;
+	double	hz;
 
-	hx = (vars->xmax - vars->xmin) * vars->zoom;
-	hy = (vars->ymax - vars->ymin) * vars->zoom;
+	hx = x * (vars->xmax - vars->xmin) / WIDTH + vars->xmin;
+	hy = y * (vars->ymax - vars->ymin) / HEIGHT + vars->ymin;
 	if (button == 4)
 	{
-		vars->zoom += 100;
-		vars->xmin += (hx + x / WIDTH * 100);
-		vars->ymin += (hy + y / HEIGHT * 100);
-		vars->xmax -= (hx + (100 - x / WIDTH * 100));
-		vars->ymax -= (hy + (100 - y / HEIGHT * 100));
+		hz = 0.9f;
+		vars->zoom *= hz;
+		vars->xmin = vars->xmin * hz + hx * (1 - hz);
+		vars->ymin = vars->ymin * hz + hy * (1 - hz);
+		vars->xmax = vars->xmax * hz + hx * (1 - hz);
+		vars->ymax = vars->ymax * hz + hy * (1 - hz);
 		vars->iter += 5;
 	}
 	else if (button == 5)
 	{
-		vars->zoom -= 100;
-		vars->xmin -= (hx + x / WIDTH * 100);
-		vars->ymin -= (hy + y / HEIGHT * 100);
-		vars->xmax += (hx + (100 - x / WIDTH * 100));
-		vars->ymax += (hy + (100 - y / HEIGHT * 100));
+		hz = 1.1f;
+		vars->zoom *= hz;
+		vars->xmin = vars->xmin * hz + hx * (1 - hz);
+		vars->ymin = vars->ymin * hz + hy * (1 - hz);
+		vars->xmax = vars->xmax * hz + hx * (1 - hz);
+		vars->ymax = vars->ymax * hz + hy * (1 - hz);
 		vars->iter -= 5;
 	}
 	draw(vars);
 	return (0);
-}*/
+}

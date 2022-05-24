@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/24 18:54:48 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/24 22:30:41 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	merror(char *str, t_vars *vars);
 // hook
 int		mouse_hook(int button, int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
-int		mouse_move(int x, int y, t_vars vars;)
+int		mouse_move(int x, int y, t_vars *vars);
+
 // draw
 void	color(t_vars *vars, int i);
 void	color_shift(t_vars *vars);
