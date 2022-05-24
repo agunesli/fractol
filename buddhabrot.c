@@ -1,8 +1,8 @@
 #include "fractol.h"
 #include <stdio.h>
 
-void	init_pixel(int pixel[WIDTH][HEIGHT])
-//void	init_pixel(t_vars *vars)
+//void	init_pixel(int pixel[WIDTH][HEIGHT])
+void	init_pixel(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -13,14 +13,14 @@ void	init_pixel(int pixel[WIDTH][HEIGHT])
 		j = 0;
 		while (j < HEIGHT)
 		{
-			pixel[i][j] = 0;
-		//	my_mlx_pixel_put_color(vars, i, j, 0xFFFFFF);
+//			pixel[i][j] = 0;
+			my_mlx_pixel_put_color(vars, i, j, 0xFFFFFF);
 			j++;
 		}
 		i++;
 	}
 }
-
+/*
 void	draw_pixel(int pixel[WIDTH][HEIGHT], t_vars *vars)
 {
 	int	i;
@@ -42,9 +42,9 @@ void	draw_pixel(int pixel[WIDTH][HEIGHT], t_vars *vars)
 		i++;
 	}
 //	printf("Le dessin des pixels est fini\n");
-}
+}*/
 
-void	buddhabrot(t_vars *vars, t_complex c, int pixel[WIDTH][HEIGHT])
+void	buddhabrot(t_vars *vars, t_complex c/*, int pixel[WIDTH][HEIGHT]*/)
 {
 	int			i;
 	int			x,y;
@@ -64,16 +64,16 @@ void	buddhabrot(t_vars *vars, t_complex c, int pixel[WIDTH][HEIGHT])
 		z.i = 2 * z.i * tmp + c.i;
 		x = (z.r - vars->xmin) * vars->zoom;
 		y = (z.i - vars->ymin) * vars->zoom;
-		pixel[x][y] = 1;
-	//	my_mlx_pixel_put_color(vars, x, y, 0x00000);
+	//	pixel[x][y] = 1;
+		my_mlx_pixel_put_color(vars, y,x, 0x00000);
 		// printf("on remplie le tablean pixel\n");
 		dist = z.r * z.r + z.i * z.i;
 		i++;
 	}
 //	printf("bouh\n");
 	// printf("Le tableau pixel est rempli\n");
-	if (i != vars->iter)
-		draw_pixel(pixel, vars);
+//	if (i != vars->iter)
+//		draw_pixel(pixel, vars);
 }
 
 void	draw_buddhabrot(t_vars *vars)
@@ -81,10 +81,11 @@ void	draw_buddhabrot(t_vars *vars)
 	double		x;
 	double		y;
 	t_complex	c;
-	int			pixel[WIDTH][HEIGHT];
+//	int			pixel[WIDTH][HEIGHT];
 
 	y = 0;
-	init_pixel(pixel);
+//	init_pixel(pixel);
+	init_pixel(vars);
 //	printf("Le dessin va etre commence\n");
 	while (y < HEIGHT)
 	{
@@ -93,7 +94,7 @@ void	draw_buddhabrot(t_vars *vars)
 		{
 			c.r = x / vars->zoom + vars->xmin;
 			c.i = y / vars->zoom + vars->ymin;
-			buddhabrot(vars, c, pixel);
+			buddhabrot(vars, c/*, pixel*/);
 			x++;
 //			printf("Les donnees de c sont envoyees\n et x = %f",x);
 		}

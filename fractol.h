@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/24 00:22:29 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:54:48 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_vars
 //test.c
 void	draw(t_vars *vars);
 int		ft_close(t_vars *vars);
+void	init_data(t_vars *vars);
 
 //mandelbrot.c
 int		mandelbrot(t_vars *vars, t_complex c);

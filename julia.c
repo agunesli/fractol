@@ -40,8 +40,6 @@ void	draw_julia(t_vars *vars)
 		{
 			c.r = vars->julia_ci.r;
 			c.i = vars->julia_ci.i;
-/*			c.r = 0.285;
-			c.i = 0.01;*/
 			i = julia(vars, c, x, y);
 			color(vars, i);
 			my_mlx_pixel_put(vars, x, y);

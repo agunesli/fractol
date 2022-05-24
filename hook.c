@@ -6,11 +6,12 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:05:35 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 15:21:41 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/24 19:00:10 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 void	move_fractal(int keycode, t_vars *vars)
 {
@@ -38,6 +39,7 @@ void	move_fractal(int keycode, t_vars *vars)
 		vars->xmin -= r.r * 0.05;
 		vars->xmax -= r.r * 0.05;
 	}
+//	printf("xmin = %f, xmax = %f, ymin = %f, ymax = %f \n",vars->xmin, vars->xmax, vars->ymin, vars->ymax);
 	draw(vars);
 }
 
@@ -56,7 +58,8 @@ int	key_hook(int keycode, t_vars *vars)
 		color_shift(vars);
 	else if (keycode == M)
 	{
-		vars->fractal += 1 % 3;
+		vars->fractal = (vars->fractal + 1) % 3;
+		init_data(vars);
 		draw(vars);
 	}
 	return (0);
@@ -137,6 +140,7 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 //		apply_zoom(x, y, vars);
 		vars->iter -= 5;
 	}
+//	printf("xmin = %f, xmax = %f, ymin = %f, ymax = %f \n",vars->xmin, vars->xmax, vars->ymin, vars->ymax);
 	draw(vars);
 	return (0);
 }
