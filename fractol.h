@@ -34,12 +34,6 @@
 # define LEFT		65361
 # define RIGHT		65363
 # define ESP		32
-# define ENTRER		65293
-# define M_UP		5
-# define M_DOWN		4
-# define M_CLICKL	1
-# define M_CLICKR	3
-# define M_CLICKS	2
 # define C		99
 # define M		109
 
@@ -102,7 +96,7 @@ void	merror(char *str, t_vars *vars);
 // hook
 int		mouse_hook(int button, int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
-
+int		mouse_move(int x, int y, t_vars vars;)
 // draw
 void	color(t_vars *vars, int i);
 void	color_shift(t_vars *vars);

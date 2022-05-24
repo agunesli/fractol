@@ -107,6 +107,7 @@ int	main(int argc, char **argv)
 	draw(&vars);
 //	printf("Le dessin est fini\n");
 	mlx_hook(vars.win, 17, 0, ft_close, &vars);
+	mlx_hook(vars.win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);

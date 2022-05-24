@@ -83,13 +83,6 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	vars->xmax = interpolate(mouse.r, vars->xmax, inter);
 	vars->ymax = interpolate(mouse.i, vars->xmax, inter);
 }*/
-/*
-void	apply_zoom(int x, int y, t_vars *vars)
-{
-	printf("xmin is %f ymin is %f\n",vars->xmin, vars->ymin);
-	vars->xmin = ((x + (WIDTH >> 1)) / (vars->zoom / 2)) / -2;
-	vars->ymin = ((y + (HEIGHT >> 1)) / (vars->zoom / 2)) / -2;
-}*/
 
 /*
 static void	apply_zoom(int x, int y, t_vars *vars)
@@ -102,6 +95,19 @@ static void	apply_zoom(int x, int y, t_vars *vars)
 	vars->ymax = y - h;
 }
 */
+
+int	mouse_move(int x, int y, t_vars vars)
+{
+	if (vars->fractal == JULIA && vars->lock == 0)
+	{
+		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
+		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
+		draw(vars);
+	}
+	return (0);
+}
+
+
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	double	hx;
@@ -111,18 +117,10 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	hy = hx;
 //	double hx = IDTH / (vars->xmax - vars->xmin) + vars->xmin;
 //	double hy = HEIGHT / (vars->ymax - vars->ymin) + vars->ymin;
-	if (vars->fractal == JULIA && vars->lock == 0)
-	{
-//		vars->julia_ci.r = x;
-//		vars->julia_ci.i = y;
-		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
-		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
-//		draw(vars);
-//		write(1,"bouh\n",5);
-	}
 	if (button == 4)
 	{
-		vars->zoom += 100;
+		vars->zoom *= 1.25;
+	//	vars->zoom += 100;
 		vars->xmin += hx;
 		vars->ymin += hy;
 		vars->xmax -= hx;
@@ -132,7 +130,8 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	}
 	else if (button == 5)
 	{
-		vars->zoom -= 100;
+		vars->zoom *= 0.8;
+	//	vars->zoom -= 100;
 		vars->xmin -= hx;
 		vars->ymax += hy;
 		vars->ymin -= hy;
@@ -144,4 +143,33 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	draw(vars);
 	return (0);
 }
+/*
+// d->p.xmax += -(frac_width * d->p.zoom * ratio_x) / 200 + frac_width / 2;
+int	mouse_hook(int button, int x, int y, t_vars *vars)
+{
+	double	hx;
+	double	hy;
 
+	hx = (vars->xmax - vars->xmin) * vars->zoom;
+	hy = (vars->ymax - vars->ymin) * vars->zoom;
+	if (button == 4)
+	{
+		vars->zoom += 100;
+		vars->xmin += (hx + x / WIDTH * 100);
+		vars->ymin += (hy + y / HEIGHT * 100);
+		vars->xmax -= (hx + (100 - x / WIDTH * 100));
+		vars->ymax -= (hy + (100 - y / HEIGHT * 100));
+		vars->iter += 5;
+	}
+	else if (button == 5)
+	{
+		vars->zoom -= 100;
+		vars->xmin -= (hx + x / WIDTH * 100);
+		vars->ymin -= (hy + y / HEIGHT * 100);
+		vars->xmax += (hx + (100 - x / WIDTH * 100));
+		vars->ymax += (hy + (100 - y / HEIGHT * 100));
+		vars->iter -= 5;
+	}
+	draw(vars);
+	return (0);
+}*/
