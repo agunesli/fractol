@@ -25,16 +25,8 @@ void	init_data(t_vars *vars)
 	vars->xmax = 2;
 	vars->ymin = -2;
 	vars->ymax = 2;
-	if (vars->fractal == JULIA) 
-	{
-		vars->julia_ci.r = 0.285;
-		vars->julia_ci.i = 0.01;
-	}
-	else
-	{
-		vars->julia_ci.r = 0;
-		vars->julia_ci.i = 0.01;
-	}
+	vars->julia_ci.r = 0.285;
+	vars->julia_ci.i = 0.01;
 /*	if (vars->fractal == MANDELBROT)
 	{
 		vars->color.rr = 30 % (0x4F + 0x01);

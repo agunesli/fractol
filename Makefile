@@ -1,4 +1,4 @@
-SRC_M	= test.c utils.c mandelbrot.c hook.c color.c buddhabrot.c julia.c
+SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c buddhabrot.c julia.c sierpinski.c
 
 #SRC_M	= take_key.c
 

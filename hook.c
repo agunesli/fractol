@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:05:35 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/25 00:46:12 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:18:14 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	mouse_move(int x, int y, t_vars *vars)
 {
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
-		vars->julia_ci.r = 2 * x / WIDTH - 1;
-		vars->julia_ci.i = 2 * y / HEIGHT - 1;
+		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
+		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
 		draw(vars);
 	}
 	return (0);
@@ -145,7 +145,6 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 	return (0);
 }*/
 
-// d->p.xmax += -(frac_width * d->p.zoom * ratio_x) / 200 + frac_width / 2;
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	double	hx;
