@@ -100,8 +100,8 @@ int	mouse_move(int x, int y, t_vars *vars)
 {
 	if (vars->fractal == JULIA && vars->lock == 0)
 	{
-		vars->julia_ci.r = 2 * (double)x / WIDTH - 1;
-		vars->julia_ci.i = 2 * (double)y / HEIGHT - 1;
+		vars->julia_ci.r = 2 * x / WIDTH - 1;
+		vars->julia_ci.i = 2 * y / HEIGHT - 1;
 		draw(vars);
 	}
 	return (0);

@@ -110,5 +110,6 @@ void	draw_julia(t_vars *vars);
 
 //buddhabrot
 void	draw_buddhabrot(t_vars *vars);
+void	draw_sierpinski(t_vars *vars);
 
 #endif

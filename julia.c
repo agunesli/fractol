@@ -7,8 +7,10 @@ int	julia(t_vars *vars, t_complex c, double x, double y)
 	double		tmp;
 	t_complex	z;
 
-	z.r = x / vars->zoom + vars->xmin;
-	z.i = y / vars->zoom + vars->ymin;
+//	z.r = x / vars->zoom + vars->xmin;
+//	z.i = y / vars->zoom + vars->ymin;
+	z.r = (vars->xmax - vars->xmin) * x / WIDTH + vars->xmin;
+	z.i = (vars->ymax - vars->ymin) * y / HEIGHT + vars->ymin;
 	i = 0;
 	tmp = 0;
 	while (i < vars->iter && (z.r * z.r + z.i * z.i) < 4)
