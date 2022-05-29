@@ -1,6 +1,4 @@
-SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c buddhabrot.c julia.c sierpinski.c
-
-#SRC_M	= take_key.c
+SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c buddhabrot22.c julia.c sierpinski.c
 
 SRC_H	= fractol.h
 
@@ -15,7 +13,6 @@ RM	=	rm -rf
 %.o: %.c
 	$(CC) $(FLAGS) -I/usr/include -Imlx -O3 -c $< -o $@	
 #	$(CC) -I/usr/include -Imlx -O3 -c $< -o $@	# For linux
-#	$(CC) -Imlx -c $< -o $@	 			# For mac os
 
 
 $(NAME):$(OBJ_M) $(SRC_H)
@@ -23,10 +20,8 @@ $(NAME):$(OBJ_M) $(SRC_H)
 
 all:	$(NAME)
 
-#$(NAME_B)	: $(OBJ_F) $(OBJ_B) $(SRC_H)
-#		$(CC) $(OBJ_F) $(OBJ_B) -o $(NAME_B)
+bonus:	$(NAME)
 
-#bonus:	$(NAME_B)
 clean:
 		$(RM) $(OBJ_M)
 

@@ -86,8 +86,8 @@ void	draw(t_vars *vars)
 	else if (vars->fractal == JULIA)
 		draw_julia(vars);
 	else if (vars->fractal == BUDDHABROT)
-		draw_sierpinski(vars);
-//		draw_buddhabrot(vars);
+//		draw_sierpinski(vars);
+		draw_buddhabrot(vars);
 	else
 		merror("Probleme avec nom de la fractal\n", vars);
 }
