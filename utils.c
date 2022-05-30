@@ -51,12 +51,12 @@ int	found_fractal(char *fract)
 		return (MANDELBROT);
 	else if (!ft_strncmp("Julia", fract, 6))
 		return (JULIA);
-	else if (!ft_strncmp("Buddhabrot", fract, 14))
+	else if (!ft_strncmp("Burningship", fract, 11))
 		return (BUDDHABROT);
 	else
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr(" --> Mandelbort\n --> Julia\n --> Buddhabrot\n");
+		ft_putstr(" --> Mandelbort\n --> Julia\n --> Burningship\n");
 		exit(EXIT_FAILURE);
 		return (0);
 	}

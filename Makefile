@@ -1,4 +1,4 @@
-SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c buddhabrot22.c julia.c sierpinski.c
+SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c burningship.c julia.c sierpinski.c
 
 SRC_H	= fractol.h
 

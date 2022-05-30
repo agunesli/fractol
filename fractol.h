@@ -19,7 +19,7 @@
 
 # define MANDELBROT 0
 # define JULIA 1
-# define BUDDHABROT 2
+# define BURNINGSHIP 2
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -77,16 +77,12 @@ typedef struct s_vars
 	int			endian;
 }	t_vars;
 
-//test.c
+// fractol
 void	draw(t_vars *vars);
 int		ft_close(t_vars *vars);
 void	init_data(t_vars *vars);
 
-//mandelbrot.c
-int		mandelbrot(t_vars *vars, t_complex c);
-void	draw_mandelbrot(t_vars *vars);
-
-// utils.c
+// utils
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -104,12 +100,9 @@ void	color_shift(t_vars *vars);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y);
 void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
 
-//julia
-int		julia(t_vars *vars, t_complex c, double x, double y);
+// fractales 
+void	draw_mandelbrot(t_vars *vars);
 void	draw_julia(t_vars *vars);
-
-//buddhabrot
-void	draw_buddhabrot(t_vars *vars);
+void	draw_burningship(t_vars *vars);
 void	draw_sierpinski(t_vars *vars);
-
 #endif

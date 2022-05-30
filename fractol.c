@@ -49,15 +49,15 @@ void	init_data(t_vars *vars)
 		vars->julia_ci.r = 0.285;
 		vars->julia_ci.i = 0.01;
 	}
-	else if (vars->fractal == BUDDHABROT)
+	else if (vars->fractal == BURNINGSHIP)
 	{
 		vars->color.rr = 30 % (0x4F + 0x01);
 		vars->color.rg = 90 % (0x4F + 0x01);
 		vars->color.rb = 60 % (0x4F + 0x01);
-		vars->xmin = -2.1;
-		vars->xmax = 0.6;
-		vars->ymin = -1.2;
-		vars->ymax = 1.2;
+		vars->xmin = -2.5;
+		vars->xmax = 1.0;
+		vars->ymin = -2.0;
+		vars->ymax = 1.0;
 	}*/
 }
 
@@ -85,14 +85,14 @@ void	draw(t_vars *vars)
 		draw_mandelbrot(vars);
 	else if (vars->fractal == JULIA)
 		draw_julia(vars);
-	else if (vars->fractal == BUDDHABROT)
+	else if (vars->fractal == BURNINGSHIP)
 //		draw_sierpinski(vars);
-		draw_buddhabrot(vars);
+		draw_burningship(vars);
 	else
 		merror("Probleme avec nom de la fractal\n", vars);
 }
 
-// 0 => Mandelbrot 1 => Julia 2 => Buddhabrot
+// 0 => Mandelbrot 1 => Julia 2 => Burningship
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -100,14 +100,14 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr(" --> Mandelbort\n --> Julia\n --> Buddhabrot\n");
+		ft_putstr(" --> Mandelbort\n --> Julia\n --> Burningship\n");
 		exit(EXIT_FAILURE);
 		return (0);
 	}
 	vars.fractal = found_fractal(argv[1]);
 //	printf("fract is %d\n", vars.fractal);
 	init_struct(&vars, argv[1]);
-//	 printf("La structure a ete init\n");
+//	printf("La structure a ete init\n");
 	draw(&vars);
 //	printf("Le dessin est fini\n");
 	mlx_hook(vars.win, 17, 0, ft_close, &vars);
