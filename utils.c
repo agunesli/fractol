@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:08:04 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/24 00:23:06 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/31 00:48:39 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putstr(char *str)
 	int	nb;
 
 	nb = write(1, str, ft_strlen(str));
-	(void)nb;	
+	(void)nb;
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -52,7 +52,7 @@ int	found_fractal(char *fract)
 	else if (!ft_strncmp("Julia", fract, 6))
 		return (JULIA);
 	else if (!ft_strncmp("Burningship", fract, 11))
-		return (BUDDHABROT);
+		return (BURNINGSHIP);
 	else
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:03:21 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:03:23 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/31 01:04:26 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
-double	abs(double x)
+double	ft_abs(double x)
 {
 	if (x >= 0)
 		return (x);
@@ -36,8 +35,8 @@ int	burningship(t_vars *vars, t_complex c)
 	while (i < vars->iter && dist < 4)
 	{
 		tmp = z.r;
-		z.r = z.r * z.r - z.i * z.i + c.r;
-		z.i = abs(2 * z.i * tmp) + c.i;
+		z.r = ft_abs(z.r * z.r - z.i * z.i + c.r);
+		z.i = ft_abs(2 * z.i * tmp + c.i);
 		dist = z.r * z.r + z.i * z.i;
 		i++;
 	}

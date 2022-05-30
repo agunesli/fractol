@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 00:51:52 by agunesli          #+#    #+#             */
+/*   Updated: 2022/05/31 00:52:29 by agunesli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-#include <stdio.h>
 
 int	ft_close(t_vars *vars)
 {
@@ -27,38 +38,6 @@ void	init_data(t_vars *vars)
 	vars->ymax = 2;
 	vars->julia_ci.r = 0.285;
 	vars->julia_ci.i = 0.01;
-/*	if (vars->fractal == MANDELBROT)
-	{
-		vars->color.rr = 30 % (0x4F + 0x01);
-		vars->color.rg = 90 % (0x4F + 0x01);
-		vars->color.rb = 60 % (0x4F + 0x01);
-		vars->xmin = -2.1;
-		vars->xmax = 0.6;
-		vars->ymin = -1.2;
-		vars->ymax = 1.2;
-	}
-	else if (vars->fractal == JULIA) 
-	{
-		vars->color.rr = 70 % (0x4F + 0x01);
-		vars->color.rg = 90 % (0x4F + 0x01);
-		vars->color.rb = 0 % (0x4F + 0x01);
-		vars->xmin = -3;
-		vars->xmax = -1.2;
-		vars->ymin = -2;
-		vars->ymax = 0.1;
-		vars->julia_ci.r = 0.285;
-		vars->julia_ci.i = 0.01;
-	}
-	else if (vars->fractal == BURNINGSHIP)
-	{
-		vars->color.rr = 30 % (0x4F + 0x01);
-		vars->color.rg = 90 % (0x4F + 0x01);
-		vars->color.rb = 60 % (0x4F + 0x01);
-		vars->xmin = -2.5;
-		vars->xmax = 1.0;
-		vars->ymin = -2.0;
-		vars->ymax = 1.0;
-	}*/
 }
 
 void	init_struct(t_vars *vars, char *fract)
@@ -86,7 +65,6 @@ void	draw(t_vars *vars)
 	else if (vars->fractal == JULIA)
 		draw_julia(vars);
 	else if (vars->fractal == BURNINGSHIP)
-//		draw_sierpinski(vars);
 		draw_burningship(vars);
 	else
 		merror("Probleme avec nom de la fractal\n", vars);
@@ -105,11 +83,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	vars.fractal = found_fractal(argv[1]);
-//	printf("fract is %d\n", vars.fractal);
 	init_struct(&vars, argv[1]);
-//	printf("La structure a ete init\n");
 	draw(&vars);
-//	printf("Le dessin est fini\n");
 	mlx_hook(vars.win, 17, 0, ft_close, &vars);
 	mlx_hook(vars.win, 6, 1L << 6, mouse_move, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);

@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:33:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/24 22:30:41 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/31 00:43:59 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,4 @@ void	my_mlx_pixel_put_color(t_vars *vars, int x, int y, int color);
 void	draw_mandelbrot(t_vars *vars);
 void	draw_julia(t_vars *vars);
 void	draw_burningship(t_vars *vars);
-void	draw_sierpinski(t_vars *vars);
 #endif

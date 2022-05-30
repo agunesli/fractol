@@ -1,4 +1,5 @@
-SRC_M	= fractol.c utils.c mandelbrot.c hook.c color.c burningship.c julia.c sierpinski.c
+SRC_M	= fractol.c utils.c hook.c color.c \
+	mandelbrot.c julia.c burningship.c
 
 SRC_H	= fractol.h
 
@@ -7,12 +8,10 @@ OBJ_M	= $(SRC_M:%.c=%.o)
 NAME	=	fractol
 CC	=	gcc
 FLAGS	=	-g3 -Wall -Wextra -Werror
-MLX	=	-g3 -lmlx -framework OpenGL -framework Appki
 RM	=	rm -rf
 
 %.o: %.c
 	$(CC) $(FLAGS) -I/usr/include -Imlx -O3 -c $< -o $@	
-#	$(CC) -I/usr/include -Imlx -O3 -c $< -o $@	# For linux
 
 
 $(NAME):$(OBJ_M) $(SRC_H)

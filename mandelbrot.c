@@ -6,12 +6,11 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:03:21 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:03:23 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/05/31 01:05:35 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 int	mandelbrot(t_vars *vars, t_complex c)
 {

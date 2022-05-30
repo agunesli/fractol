@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   julia.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 00:49:57 by agunesli          #+#    #+#             */
+/*   Updated: 2022/05/31 00:55:09 by agunesli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-#include <stdio.h>
 
 int	julia(t_vars *vars, t_complex c, double x, double y)
 {
@@ -7,8 +18,6 @@ int	julia(t_vars *vars, t_complex c, double x, double y)
 	double		tmp;
 	t_complex	z;
 
-//	z.r = x / vars->zoom + vars->xmin;
-//	z.i = y / vars->zoom + vars->ymin;
 	z.r = (vars->xmax - vars->xmin) * x / WIDTH + vars->xmin;
 	z.i = (vars->ymax - vars->ymin) * y / HEIGHT + vars->ymin;
 	i = 0;
