@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:51:52 by agunesli          #+#    #+#             */
-/*   Updated: 2022/05/31 00:52:29 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:49:58 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_putstr("usage : fractol [fractals]\n fractals : \n");
-		ft_putstr(" --> Mandelbort\n --> Julia\n --> Burningship\n");
+		ft_putstr(" --> Mandelbrot\n --> Julia\n --> Burningship\n");
 		exit(EXIT_FAILURE);
 		return (0);
 	}
